@@ -9,8 +9,8 @@ class DatasetDetection: public DatasetInterface
     private:
 
 
-        std::vector<std::vector<float>> background;
-        std::vector<std::vector<float>> foreground;
+        std::vector<std::vector<float>>              background;
+        std::vector<std::vector<std::vector<float>>> foreground;
 
     public:
         DatasetDetection(std::string json_file_name);
@@ -18,8 +18,8 @@ class DatasetDetection: public DatasetInterface
 
     private:
         void load_images(std::vector<std::vector<float>> &result, std::string path_dir, unsigned int downscale = 1);
-        std::vector<float> mix_min( unsigned int backgound_idx,
-                                    unsigned int foreground_idx,
+        std::vector<float> mix_min( std::vector<float> &background,
+                                    std::vector<float> &foreground,
                                     float threshold,
                                     float alpha,
                                     bool background_inversion,

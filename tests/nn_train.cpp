@@ -9,10 +9,16 @@ int main()
 
 	DatasetDetection dataset("dataset_letters_detection.json");
 
-	//dataset_raw.save_images("dataset_samples/training/", "dataset_samples/testing/");
+	//dataset.save_images("dataset_samples/training/", "dataset_samples/testing/");
+
 
 	{
-		ClassificationExperiment experiment(dataset, "networks/letter_net_01/");
+		ClassificationExperiment experiment(dataset, "networks/letter_net_0/");
+		experiment.run();
+	}
+
+	{
+		ClassificationExperiment experiment(dataset, "networks/letter_net_1/");
 		experiment.run();
 	}
 

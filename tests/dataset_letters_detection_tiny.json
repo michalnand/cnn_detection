@@ -22,6 +22,16 @@
 
     "foreground"    :
     [
-        "/home/michal/dataset/document_validation/fonts/Sample001"
+        [
+            "/home/michal/dataset/document_validation/fonts/Sample001"
+        ],
+
+        [
+            "/home/michal/dataset/document_validation/fonts/Sample005"
+        ],
+
+        [
+            "/home/michal/dataset/document_validation/fonts/Sample015"
+        ]
     ]
 }
