@@ -4,9 +4,6 @@
     "width"                 : 32,
     "height"                : 32,
 
-    "background downscale"  : 1,
-    "foreground downscale"  : 4,
-
     "threshold"                 : 0.1,
     "alpha"                     : 0.3,
     "foreground inversion"      : false,
@@ -22,12 +19,21 @@
 
     "foreground"    :
     [
-        [
-            "/home/michal/dataset/document_validation/fonts/Sample001",
-            "/home/michal/dataset/document_validation/fonts/Sample002",
-            "/home/michal/dataset/document_validation/fonts/Sample003",
-            "/home/michal/dataset/document_validation/fonts/Sample004",
-            "/home/michal/dataset/document_validation/fonts/Sample005"
-        ]
+        {
+            "downscale"  : 1,
+            "dirs"       :
+            [
+                "/home/michal/dataset/document_validation/code"
+            ]
+        },
+        {
+            "downscale"  : 4,
+            "dirs"       :
+            [
+                "/home/michal/dataset/document_validation/fonts/Sample001",
+                "/home/michal/dataset/document_validation/fonts/Sample002"
+            ]
+        }
+
     ]
 }

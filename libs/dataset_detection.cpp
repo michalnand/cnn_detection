@@ -14,8 +14,6 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
     channels= 3;
 
     float training_testing_ratio = json.result["training testing ratio"].asFloat();
-    unsigned int background_downscale = json.result["background downscale"].asInt();
-    unsigned int foreground_downscale = json.result["foreground downscale"].asInt();
 
     float threshold   = json.result["threshold"].asFloat();
     float alpha       = json.result["alpha"].asFloat();
@@ -25,26 +23,33 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
     float luma_noise = json.result["luma noise"].asFloat();
 
 
-    alpha = json.result["alpha"].asFloat();
-    for (unsigned int i = 0; i < json.result["background"].size(); i++)
-    {
-        std::string dir = json.result["background"][i].asString();
-        std::cout << "loading background from " << dir << "\n";
-        load_images(background, dir, background_downscale);
-    }
+
+
 
     unsigned int forreground_classes_count = json.result["foreground"].size();
     foreground.resize(forreground_classes_count);
 
-    for (unsigned int j = 0; j < forreground_classes_count; j++)
+    for (unsigned int class_id = 0; class_id < forreground_classes_count; class_id++)
     {
-        for (unsigned int i = 0; i < json.result["foreground"][j].size(); i++)
+        unsigned int downscale = json.result["foreground"][class_id]["downscale"].asInt();
+        for (unsigned int i = 0; i < json.result["foreground"][class_id]["dirs"].size(); i++)
         {
-            std::string dir = json.result["foreground"][j][i].asString();
-            std::cout << "class " << j << " loading foreground from " << dir << "\n";
-            load_images(foreground[j], dir, foreground_downscale);
+            std::string dir = json.result["foreground"][class_id]["dirs"][i].asString();
+            std::cout << "class " << class_id << " loading foreground from " << dir << "\n";
+            load_images(foreground[class_id], dir, downscale);
         }
     }
+
+    for (unsigned int i = 0; i < json.result["background"].size(); i++)
+    {
+        std::string dir = json.result["background"][i].asString();
+        std::cout << "loading background from " << dir << "\n";
+        load_images(background, dir, 1);
+    }
+
+
+
+
 
     unsigned int classes_count = forreground_classes_count + 1;
     training.resize(classes_count);
@@ -140,10 +145,22 @@ void DatasetDetection::load_images(std::vector<std::vector<float>> &result, std:
             unsigned int input_height   = image.height();
             unsigned int input_width    = image.width();
 
-            if (width*downscale != input_width)
+            if ( (width*downscale != input_width) ||
+                 (height*downscale != input_height) )
+                 continue;
+            /*
+            if ( (width*downscale != input_width) ||
+                 (height*downscale != input_height) )
+            {
+                std::cout << "loading " << image_file_name  << "\n";
+                std::cout << downscale << "\n";
+                std::cout << width << " " << height << "\n";
+                std::cout << input_height << " " << input_width << "\n";
+                std::cout << "ERROR\n";
                 continue;
-            if (height*downscale != input_height)
-                continue;
+            }
+            */
+
 
             for (unsigned int ch = 0; ch < channels; ch++)
             for (unsigned int y = 0; y < height; y++)
