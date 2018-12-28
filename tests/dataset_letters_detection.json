@@ -8,8 +8,8 @@
     "foreground downscale"  : 4,
 
     "threshold"                 : 0.1,
-    "alpha"                     : 0.3,
-    "foreground inversion"      : false,
+    "alpha"                     : 0.1,
+    "foreground inversion"      : true,
     "background inversion"      : false,
     "noise"                     : 0.1,
     "luma_noise"                : 0.2,

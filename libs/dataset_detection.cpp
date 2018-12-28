@@ -203,8 +203,6 @@ std::vector<float> DatasetDetection::mix_min(   std::vector<float> &background,
     float background_luma = rndf(-luma_noise, luma_noise);
     float foreground_luma = rndf(-luma_noise, luma_noise);
 
-
-
     for (unsigned int i = 0; i < size; i++)
     {
         float raw =  background[i];
@@ -233,6 +231,7 @@ std::vector<float> DatasetDetection::mix_min(   std::vector<float> &background,
             }
         }
     }
+
 
     for (unsigned int i = 0; i < size; i++)
     {
