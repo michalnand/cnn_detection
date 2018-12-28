@@ -139,6 +139,12 @@ void DatasetDetection::load_images(std::vector<std::vector<float>> &result, std:
 
             unsigned int input_height   = image.height();
             unsigned int input_width    = image.width();
+
+            if (width*downscale != input_width)
+                continue;
+            if (height*downscale != input_height)
+                continue;
+
             for (unsigned int ch = 0; ch < channels; ch++)
             for (unsigned int y = 0; y < height; y++)
             for (unsigned int x = 0; x < width; x++)
