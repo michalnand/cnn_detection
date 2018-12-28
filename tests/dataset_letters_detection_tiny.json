@@ -1,0 +1,27 @@
+{
+    "training testing ratio" : 0.2,
+
+    "width"                 : 32,
+    "height"                : 32,
+
+    "background downscale"  : 1,
+    "foreground downscale"  : 4,
+
+    "threshold"                 : 0.1,
+    "alpha"                     : 0.3,
+    "foreground inversion"      : true,
+    "background inversion"      : true,
+    "noise"                     : 0.1,
+
+
+
+    "background"     :
+    [
+        "/home/michal/dataset/document_validation/background/tiny"
+    ],
+
+    "foreground"    :
+    [
+        "/home/michal/dataset/document_validation/fonts/Sample001"
+    ]
+}
