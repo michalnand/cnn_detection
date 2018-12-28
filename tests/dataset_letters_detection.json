@@ -17,12 +17,13 @@
 
     "background"     :
     [
-        "/home/michal/dataset/document_validation/background/paper"
+        "/home/michal/dataset/document_validation/background/paper",
+        "/home/michal/dataset/document_validation/background/testing"
     ],
 
     "foreground"    :
     [
-        { 
+        {
             "downscale"  : 1,
             "dirs"       :
             [
