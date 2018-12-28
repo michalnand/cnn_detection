@@ -22,7 +22,7 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
     float background_inversion = json.result["background inversion"].asBool();
     float foreground_inversion = json.result["foreground inversion"].asBool();
     float noise = json.result["noise"].asFloat();
-
+    float luma_noise = json.result["luma noise"].asFloat();
 
 
     alpha = json.result["alpha"].asFloat();
@@ -61,6 +61,7 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
                                     background_inversion,
                                     foreground_inversion,
                                     noise,
+                                    luma_noise,
                                     true
                                     );
 
@@ -71,6 +72,7 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
                                         background_inversion,
                                         foreground_inversion,
                                         noise,
+                                        luma_noise,
                                         false
                                     );
 
@@ -92,9 +94,7 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
 
 
 
-        float rndf = (rand()%100000)/100000.0;
-
-        if (rndf < training_testing_ratio)
+        if (rndf(0.0, 1.0) < training_testing_ratio)
         {
             add_testing(item_true);
             add_testing(item_false);
@@ -105,6 +105,8 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
             add_training(item_false);
         }
     }
+
+    print();
 
 }
 
@@ -135,7 +137,6 @@ void DatasetDetection::load_images(std::vector<std::vector<float>> &result, std:
             ImageLoad image;
             image.load(image_file_name, false, true);
 
-
             unsigned int input_height   = image.height();
             unsigned int input_width    = image.width();
             for (unsigned int ch = 0; ch < channels; ch++)
@@ -161,6 +162,7 @@ std::vector<float> DatasetDetection::mix_min(   std::vector<float> &background,
                                                 bool background_inversion,
                                                 bool foreground_inversion,
                                                 float noise,
+                                                float luma_noise,
                                                 bool mix_enabled
                                             )
 {
@@ -175,17 +177,24 @@ std::vector<float> DatasetDetection::mix_min(   std::vector<float> &background,
     if (rand()%2)
         foreground_invert = true;
 
+    float background_luma = rndf(-luma_noise, luma_noise);
+    float foreground_luma = rndf(-luma_noise, luma_noise);
+
+
+
     for (unsigned int i = 0; i < size; i++)
     {
-        result[i] = background[i];
+        float raw =  background[i];
         if (background_inversion)
         if (background_invert)
-            result[i] = 1.0 - result[i];
+            raw = 1.0 - raw;
+
+        result[i] = raw + background_luma;
     }
 
     if (mix_enabled)
     {
-        float a = alpha*(rand()%100000)/100000.0;
+        float a = rndf(0.0, alpha);
 
         for (unsigned int i = 0; i < size; i++)
         {
@@ -196,6 +205,7 @@ std::vector<float> DatasetDetection::mix_min(   std::vector<float> &background,
                 if (foreground_invert)
                     raw = 1.0 - raw;
 
+                raw+= foreground_luma;
                 result[i] = (1.0 - a)*raw + a*background[i];
             }
         }
@@ -203,10 +213,45 @@ std::vector<float> DatasetDetection::mix_min(   std::vector<float> &background,
 
     for (unsigned int i = 0; i < size; i++)
     {
-        float rndf = (rand()%100000)/100000.0;
-        result[i] = (1.0 - noise)*result[i] + rndf*noise;
+        float v = rndf(-1.0, 1.0);
+        result[i] = (1.0 - noise)*result[i] + noise*v;
+    }
+
+    float max = result[0];
+    float min = max;
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+        if (result[i] > max)
+            max = result[i];
+        if (result[i] < min)
+            min = result[i];
+    }
+
+    float k = 0.0;
+    float q = 0.0;
+
+    if (max > min)
+    {
+        k = (1.0 - 0.0)/(max - min);
+        q = 1.0 - k*max;
+    }
+
+    for (unsigned int i = 0; i < size; i++)
+    {
+        result[i] = k*result[i] + q;
     }
 
 
+
     return result;
+}
+
+
+float DatasetDetection::rndf(float min, float max)
+{
+    float v = (rand()%100000)/100000.0;
+    v = v*(max - min) + min;
+
+    return v;
 }

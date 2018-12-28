@@ -7,17 +7,16 @@
     "background downscale"  : 1,
     "foreground downscale"  : 4,
 
-    "alpha"                 : 0.3,
-    "noise"                 : 0.2,
-    "foreground inversion"  : true,
-    "augmentation"          : true,
-
+    "threshold"                 : 0.1,
+    "alpha"                     : 0.3,
+    "foreground inversion"      : false,
+    "background inversion"      : false,
+    "noise"                     : 0.1,
+    "luma_noise"                : 0.2,
 
     "background"     :
     [
-        "/home/michal/dataset/document_validation/background/paper",
-        "/home/michal/dataset/document_validation/background/training",
-        "/home/michal/dataset/document_validation/background/testing"
+        "/home/michal/dataset/document_validation/background/paper"
     ],
 
     "foreground"    :

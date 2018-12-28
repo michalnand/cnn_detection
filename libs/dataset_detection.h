@@ -25,7 +25,10 @@ class DatasetDetection: public DatasetInterface
                                     bool background_inversion,
                                     bool foreground_inversion,
                                     float noise,
+                                    float luma_noise,
                                     bool mix_enabled);
+
+        float rndf(float min = 0.0, float max = 1.0);
 
 };
 

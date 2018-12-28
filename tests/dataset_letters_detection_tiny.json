@@ -9,29 +9,25 @@
 
     "threshold"                 : 0.1,
     "alpha"                     : 0.3,
-    "foreground inversion"      : true,
-    "background inversion"      : true,
+    "foreground inversion"      : false,
+    "background inversion"      : false,
     "noise"                     : 0.1,
-
+    "luma_noise"                : 0.2,
 
 
     "background"     :
     [
-        "/home/michal/dataset/document_validation/background/tiny"
+        "/home/michal/dataset/document_validation/background/paper"
     ],
 
     "foreground"    :
     [
         [
-            "/home/michal/dataset/document_validation/fonts/Sample001"
-        ],
-
-        [
+            "/home/michal/dataset/document_validation/fonts/Sample001",
+            "/home/michal/dataset/document_validation/fonts/Sample002",
+            "/home/michal/dataset/document_validation/fonts/Sample003",
+            "/home/michal/dataset/document_validation/fonts/Sample004",
             "/home/michal/dataset/document_validation/fonts/Sample005"
-        ],
-
-        [
-            "/home/michal/dataset/document_validation/fonts/Sample015"
         ]
     ]
 }

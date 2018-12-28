@@ -7,9 +7,9 @@ int main()
 {
 	srand(time(NULL));
 
-	DatasetDetection dataset("dataset_letters_detection.json");
+	DatasetDetection dataset("dataset_letters_detection_tiny.json");
 
-	//dataset.save_images("dataset_samples/training/", "dataset_samples/testing/");
+	dataset.save_images("dataset_examples/training/", "dataset_examples/testing/");
 
 
 	{
@@ -21,7 +21,6 @@ int main()
 		ClassificationExperiment experiment(dataset, "networks/letter_net_1/");
 		experiment.run();
 	}
-
 
 	std::cout << "program done\n";
 
