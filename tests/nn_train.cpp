@@ -7,7 +7,7 @@ int main()
 {
 	srand(time(NULL));
 
-	DatasetDetection dataset("dataset_letters_detection_tiny.json");
+	DatasetDetection dataset("dataset_letters_detection.json");
 
 //	dataset.save_images("dataset_examples/training/", "dataset_examples/testing/");
 
