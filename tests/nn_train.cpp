@@ -9,7 +9,7 @@ int main()
 
 	DatasetDetection dataset("dataset_letters_detection.json");
 
-	dataset.save_images("dataset_examples/training/", "dataset_examples/testing/");
+	//dataset.save_images("dataset_examples/training/", "dataset_examples/testing/");
 
 
 	{
