@@ -229,7 +229,7 @@ std::vector<float> DatasetDetection::mix_min(   std::vector<float> &background,
 
                 raw+= foreground_luma;
                 result[i] = (1.0 - a)*raw + a*background[i];
-            }
+            } 
         }
     }
 
