@@ -97,6 +97,8 @@ void CNNDetector::bb_compute(unsigned int padding)
             id[j][i] = 0;
     }
 
+    result.bounding_box.clear();
+
     for (unsigned int j = 0; j < output_height; j++)
     for (unsigned int i = 0; i < output_width; i++)
     {
@@ -104,10 +106,13 @@ void CNNDetector::bb_compute(unsigned int padding)
         {
             id[j][i] = id_idx;
             id_idx++;
+
+            result.bounding_box.push_back(BoundingBox(i, i + 4, j, j + 4, result.class_result[j][i], id_idx));
+
         }
     }
 
-
+/*
     bool change = true;
     while (change)
     {
@@ -219,6 +224,7 @@ void CNNDetector::bb_compute(unsigned int padding)
     for (unsigned int i = 0; i < bb_tmp.size(); i++)
         if (wrong[i] == false)
             result.bounding_box.push_back(bb_tmp[i]);
+    */
 }
 
 void CNNDetector::put_pixel(std::vector<float> &image_v, unsigned int x, unsigned int y, unsigned int ch, float value)
@@ -240,6 +246,7 @@ void CNNDetector::process(std::vector<float> &image_v)
     {
         result.confidence_result[k][j][i] = nn_output[ptr];
         ptr++;
+        std::cout << result.confidence_result[k][j][i] << " ";
     }
 
 
@@ -251,7 +258,7 @@ void CNNDetector::process(std::vector<float> &image_v)
         {
             float conf_best = result.confidence_result[max_k][j][i];
             float conf = result.confidence_result[k][j][i];
-            if (conf > 0.99)
+            if (conf > 0.7)
             if (conf > conf_best)
                 max_k = k;
         }
@@ -309,9 +316,8 @@ void CNNDetector::process(std::vector<float> &image_v)
     }
 
 
-    /*
-    unsigned int padding = 16;
 
+/*
     float alpha = 0.3;
     for (unsigned int k = 0; k < 3; k++)
         for (unsigned int j = padding; j < image_height - padding; j++)
@@ -336,7 +342,7 @@ void CNNDetector::process(std::vector<float> &image_v)
                 }
 
             }
-    */
+*/
     ImageSave image(image_width, image_height, false);
     image.save("result/result.png", img_data);
 }

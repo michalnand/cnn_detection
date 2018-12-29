@@ -13,12 +13,12 @@ int main()
 
 
 	{
-		ClassificationExperiment experiment(dataset, "networks/letter_net_0/");
+		ClassificationExperiment experiment(dataset, "networks/net_0/");
 		experiment.run();
 	}
 
 	{
-		ClassificationExperiment experiment(dataset, "networks/letter_net_1/");
+		ClassificationExperiment experiment(dataset, "networks/net_1/");
 		experiment.run();
 	}
 
