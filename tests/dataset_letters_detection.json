@@ -32,78 +32,11 @@
             ]
         },
         {
-            "downscale"  : 4,
+            "downscale"  : 2,
             "dirs"       :
-            [ 
-                "/home/michal/dataset/images_dataset/fonts/Sample001",
-                "/home/michal/dataset/images_dataset/fonts/Sample002",
-                "/home/michal/dataset/images_dataset/fonts/Sample003",
-                "/home/michal/dataset/images_dataset/fonts/Sample004",
-                "/home/michal/dataset/images_dataset/fonts/Sample004",
-                "/home/michal/dataset/images_dataset/fonts/Sample005",
-                "/home/michal/dataset/images_dataset/fonts/Sample006",
-                "/home/michal/dataset/images_dataset/fonts/Sample007",
-                "/home/michal/dataset/images_dataset/fonts/Sample008",
-                "/home/michal/dataset/images_dataset/fonts/Sample009",
-
-                "/home/michal/dataset/images_dataset/fonts/Sample010",
-                "/home/michal/dataset/images_dataset/fonts/Sample011",
-                "/home/michal/dataset/images_dataset/fonts/Sample012",
-                "/home/michal/dataset/images_dataset/fonts/Sample013",
-                "/home/michal/dataset/images_dataset/fonts/Sample014",
-                "/home/michal/dataset/images_dataset/fonts/Sample014",
-                "/home/michal/dataset/images_dataset/fonts/Sample016",
-                "/home/michal/dataset/images_dataset/fonts/Sample017",
-                "/home/michal/dataset/images_dataset/fonts/Sample018",
-                "/home/michal/dataset/images_dataset/fonts/Sample019",
-
-                "/home/michal/dataset/images_dataset/fonts/Sample020",
-                "/home/michal/dataset/images_dataset/fonts/Sample021",
-                "/home/michal/dataset/images_dataset/fonts/Sample022",
-                "/home/michal/dataset/images_dataset/fonts/Sample023",
-                "/home/michal/dataset/images_dataset/fonts/Sample024",
-                "/home/michal/dataset/images_dataset/fonts/Sample024",
-                "/home/michal/dataset/images_dataset/fonts/Sample026",
-                "/home/michal/dataset/images_dataset/fonts/Sample027",
-                "/home/michal/dataset/images_dataset/fonts/Sample028",
-                "/home/michal/dataset/images_dataset/fonts/Sample029",
-
-                "/home/michal/dataset/images_dataset/fonts/Sample030",
-                "/home/michal/dataset/images_dataset/fonts/Sample031",
-                "/home/michal/dataset/images_dataset/fonts/Sample032",
-                "/home/michal/dataset/images_dataset/fonts/Sample033",
-                "/home/michal/dataset/images_dataset/fonts/Sample034",
-                "/home/michal/dataset/images_dataset/fonts/Sample034",
-                "/home/michal/dataset/images_dataset/fonts/Sample036",
-                "/home/michal/dataset/images_dataset/fonts/Sample037",
-                "/home/michal/dataset/images_dataset/fonts/Sample038",
-                "/home/michal/dataset/images_dataset/fonts/Sample039",
-
-                "/home/michal/dataset/images_dataset/fonts/Sample040",
-                "/home/michal/dataset/images_dataset/fonts/Sample041",
-                "/home/michal/dataset/images_dataset/fonts/Sample042",
-                "/home/michal/dataset/images_dataset/fonts/Sample043",
-                "/home/michal/dataset/images_dataset/fonts/Sample044",
-                "/home/michal/dataset/images_dataset/fonts/Sample044",
-                "/home/michal/dataset/images_dataset/fonts/Sample046",
-                "/home/michal/dataset/images_dataset/fonts/Sample047",
-                "/home/michal/dataset/images_dataset/fonts/Sample048",
-                "/home/michal/dataset/images_dataset/fonts/Sample049",
-
-                "/home/michal/dataset/images_dataset/fonts/Sample050",
-                "/home/michal/dataset/images_dataset/fonts/Sample051",
-                "/home/michal/dataset/images_dataset/fonts/Sample052",
-                "/home/michal/dataset/images_dataset/fonts/Sample053",
-                "/home/michal/dataset/images_dataset/fonts/Sample054",
-                "/home/michal/dataset/images_dataset/fonts/Sample054",
-                "/home/michal/dataset/images_dataset/fonts/Sample056",
-                "/home/michal/dataset/images_dataset/fonts/Sample057",
-                "/home/michal/dataset/images_dataset/fonts/Sample058",
-                "/home/michal/dataset/images_dataset/fonts/Sample059",
-
-                "/home/michal/dataset/images_dataset/fonts/Sample060",
-                "/home/michal/dataset/images_dataset/fonts/Sample061",
-                "/home/michal/dataset/images_dataset/fonts/Sample062"
+            [
+                "/home/michal/dataset/images_dataset/font_real/1",
+                "/home/michal/dataset/images_dataset/font_real/2"
             ]
         }
 
