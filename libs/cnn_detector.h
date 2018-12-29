@@ -3,9 +3,12 @@
 
 #include <vector>
 #include <cnn.h>
+#include <bounding_box.h>
 
 typedef std::vector<std::vector<unsigned int>>           ConfMat;
 typedef std::vector<std::vector<std::vector<float>>>     ConfTensor;
+
+
 
 struct sCNNDetectorResult
 {
@@ -13,6 +16,8 @@ struct sCNNDetectorResult
 
     ConfMat class_result;
     ConfTensor confidence_result;
+
+    std::vector<BoundingBox> bounding_box;
 };
 
 class CNNDetector
@@ -39,7 +44,8 @@ class CNNDetector
         void result_init();
         void filter(std::vector<std::vector<unsigned int>> &class_result);
         std::vector<float> class_color(unsigned int id, unsigned int max_count);
-
+        void bb_compute(unsigned int padding);
+        void put_pixel(std::vector<float> &image_v, unsigned int x, unsigned int y, unsigned int ch, float value);
 };
 
 #endif

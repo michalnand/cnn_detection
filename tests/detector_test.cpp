@@ -42,7 +42,7 @@ int main()
 {
 	auto image = load_image("images/id_00.png");
 
-	CNNDetector detector("networks/letter_net_1/trained/cnn_config.json", image.width, image.height);
+	CNNDetector detector("networks/letter_net_2/trained/cnn_config.json", image.width, image.height);
 
 
 	detector.process(image.data);

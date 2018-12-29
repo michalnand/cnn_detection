@@ -66,6 +66,166 @@ CNNDetector::~CNNDetector()
         delete nn;
 }
 
+unsigned int min(unsigned int a, unsigned int b)
+{
+    if (a < b)
+        return a;
+    return b;
+}
+
+int bb_idx_by_id(std::vector<BoundingBox> &boxes, unsigned int id)
+{
+    for (unsigned int j = 0; j < boxes.size(); j++)
+        if (boxes[j].get_id() == id)
+            return j;
+
+    return -1;
+}
+
+void CNNDetector::bb_compute(unsigned int padding)
+{
+    std::vector<std::vector<unsigned int>> id;
+
+    unsigned int id_idx = 1;
+
+    id.resize(output_height);
+
+    for (unsigned int j = 0; j < output_height; j++)
+    {
+        id[j].resize(output_width);
+        for (unsigned int i = 0; i < output_width; i++)
+            id[j][i] = 0;
+    }
+
+    for (unsigned int j = 0; j < output_height; j++)
+    for (unsigned int i = 0; i < output_width; i++)
+    {
+        if (result.class_result[j][i] > 0)
+        {
+            id[j][i] = id_idx;
+            id_idx++;
+        }
+    }
+
+
+    bool change = true;
+    while (change)
+    {
+        change = false;
+        for (unsigned int j = 1; j < output_height-1; j++)
+            for (unsigned int i = 1; i < output_width-1; i++)
+            if (result.class_result[j][i] != 0)
+            {
+                if (result.class_result[j][i] == result.class_result[j][i+1])
+                if (id[j][i] > id[j][i+1])
+                {
+                    id[j][i] = id[j][i+1];
+                    change = true;
+                }
+
+                if (result.class_result[j][i] == result.class_result[j][i-1])
+                if (id[j][i] > id[j][i-1])
+                {
+                    id[j][i] = id[j][i-1];
+                    change = true;
+                }
+
+                if (result.class_result[j][i] == result.class_result[j+1][i])
+                if (id[j][i] > id[j+1][i])
+                {
+                    id[j][i] = id[j+1][i];
+                    change = true;
+                }
+
+                if (result.class_result[j][i] == result.class_result[j-1][i])
+                if (id[j][i] > id[j-1][i])
+                {
+                    id[j][i] = id[j-1][i];
+                    change = true;
+                }
+
+                if (result.class_result[j][i] == result.class_result[j+1][i+1])
+                if (id[j][i] > id[j+1][i+1])
+                {
+                    id[j][i] = id[j+1][i+1];
+                    change = true;
+                }
+
+                if (result.class_result[j][i] == result.class_result[j+1][i-1])
+                if (id[j][i] > id[j+1][i-1])
+                {
+                    id[j][i] = id[j+1][i-1];
+                    change = true;
+                }
+
+                if (result.class_result[j][i] == result.class_result[j-1][i+1])
+                if (id[j][i] > id[j-1][i+1])
+                {
+                    id[j][i] = id[j-1][i+1];
+                    change = true;
+                }
+
+                if (result.class_result[j][i] == result.class_result[j-1][i-1])
+                if (id[j][i] > id[j-1][i-1])
+                {
+                    id[j][i] = id[j-1][i-1];
+                    change = true;
+                }
+            }
+    }
+
+    std::vector<BoundingBox> bb_tmp;
+
+    for (unsigned int j = 0; j < output_height; j++)
+        for (unsigned int i = 0; i < output_width; i++)
+        if (result.class_result[j][i] != 0)
+        {
+            unsigned int class_id = result.class_result[j][i];
+            int bb_idx = bb_idx_by_id(bb_tmp, id[j][i]);
+            if (bb_idx == -1)
+                bb_tmp.push_back(BoundingBox(i, i, j, j, class_id, id[j][i]));
+            else
+                bb_tmp[bb_idx].set_extremal(i, i, j, j, class_id, id[j][i]);
+        }
+
+    std::vector <bool> wrong(bb_tmp.size());
+    for (unsigned int i = 0; i < wrong.size(); i++)
+        wrong[i] = false;
+
+    for (unsigned int i = 0; i < bb_tmp.size(); i++)
+    {
+        unsigned int min_x = padding + bb_tmp[i].get_min_x()*width_ratio;
+        unsigned int max_x = padding + bb_tmp[i].get_max_x()*width_ratio;
+        unsigned int min_y = bb_tmp[i].get_min_y()*height_ratio;
+        unsigned int max_y = bb_tmp[i].get_max_y()*height_ratio;
+
+        if (    (max_x > (image_width - padding)) ||
+                (min_x < padding) ||
+                (max_y > (image_height - padding)) ||
+                (min_y < padding) )
+
+                wrong[i] = true;
+    }
+
+    for (unsigned int i = 0; i < bb_tmp.size(); i++)
+    {
+        if ( (bb_tmp[i].get_width() < 3) ||
+             (bb_tmp[i].get_height() < 3) )
+                wrong[i] = true;
+    }
+
+    result.bounding_box.clear();
+
+    for (unsigned int i = 0; i < bb_tmp.size(); i++)
+        if (wrong[i] == false)
+            result.bounding_box.push_back(bb_tmp[i]);
+}
+
+void CNNDetector::put_pixel(std::vector<float> &image_v, unsigned int x, unsigned int y, unsigned int ch, float value)
+{
+    unsigned int idx = (ch*image_height + y)*image_width + x;
+    image_v[idx] = value;
+}
 
 void CNNDetector::process(std::vector<float> &image_v)
 {
@@ -91,7 +251,7 @@ void CNNDetector::process(std::vector<float> &image_v)
         {
             float conf_best = result.confidence_result[max_k][j][i];
             float conf = result.confidence_result[k][j][i];
-            if (conf > 0.998)
+            if (conf > 0.99)
             if (conf > conf_best)
                 max_k = k;
         }
@@ -99,36 +259,57 @@ void CNNDetector::process(std::vector<float> &image_v)
         result.class_result[j][i] = max_k;
     }
 
-    // filter(result.class_result);
+    unsigned int padding = 16;
+
+    bb_compute(padding);
 
 
-    for (unsigned int k = 0; k < output_depth; k++)
-    {
-        std::vector<float> img_data(output_width*output_height);
-        ptr = 0;
-        for (unsigned int j = 0; j < output_height; j++)
-        {
-            for (unsigned int i = 0; i < output_width; i++)
-            {
-                if (result.class_result[j][i] == k)
-                    img_data[ptr] = 1.0;
-                else
-                    img_data[ptr] = 0.0;
-                ptr++;
-            }
-        }
 
-
-        std::string file_name = "result/" + std::to_string(k) + ".png";
-        ImageSave image(output_width, output_height, true);
-        image.save(file_name, img_data);
-    }
-
+    for (unsigned int i = 0; i < result.bounding_box.size(); i++)
+        result.bounding_box[i].print();
 
     std::vector<float> img_data(image_width*image_height*3);
     for (unsigned int j = 0; j < img_data.size(); j++)
-        img_data[j] = 0.0;
+        img_data[j] = image_v[j];
 
+    std::cout << "bb count " << result.bounding_box.size() << "\n";
+
+
+    for (unsigned int i = 0; i < result.bounding_box.size(); i++)
+    {
+        unsigned int min_x = padding + result.bounding_box[i].get_min_x()*width_ratio;
+        unsigned int max_x = padding + result.bounding_box[i].get_max_x()*width_ratio;
+        unsigned int min_y = padding + result.bounding_box[i].get_min_y()*height_ratio;
+        unsigned int max_y = padding + result.bounding_box[i].get_max_y()*height_ratio;
+
+            auto color = class_color(result.bounding_box[i].get_class_id(), output_depth-1);
+
+            for (unsigned int j = min_x; j < max_x; j++)
+            {
+                put_pixel(img_data, j, min_y, 0, color[0]);
+                put_pixel(img_data, j, min_y, 1, color[1]);
+                put_pixel(img_data, j, min_y, 2, color[2]);
+
+                put_pixel(img_data, j, max_y, 0, color[0]);
+                put_pixel(img_data, j, max_y, 1, color[1]);
+                put_pixel(img_data, j, max_y, 2, color[2]);
+            }
+
+
+            for (unsigned int j = min_y; j < max_y; j++)
+            {
+                put_pixel(img_data, min_x, j, 0, color[0]);
+                put_pixel(img_data, min_x, j, 1, color[1]);
+                put_pixel(img_data, min_x, j, 2, color[2]);
+
+                put_pixel(img_data, max_x, j, 0, color[0]);
+                put_pixel(img_data, max_x, j, 1, color[1]);
+                put_pixel(img_data, max_x, j, 2, color[2]);
+            }
+    }
+
+
+    /*
     unsigned int padding = 16;
 
     float alpha = 0.3;
@@ -155,7 +336,7 @@ void CNNDetector::process(std::vector<float> &image_v)
                 }
 
             }
-
+    */
     ImageSave image(image_width, image_height, false);
     image.save("result/result.png", img_data);
 }
