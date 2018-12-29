@@ -258,7 +258,7 @@ void CNNDetector::process(std::vector<float> &image_v)
         {
             float conf_best = result.confidence_result[max_k][j][i];
             float conf = result.confidence_result[k][j][i];
-            if (conf > 0.7)
+            if (conf > 0.99)
             if (conf > conf_best)
                 max_k = k;
         }
@@ -268,6 +268,11 @@ void CNNDetector::process(std::vector<float> &image_v)
 
     unsigned int padding = 16;
 
+    std::vector<float> img_data(image_width*image_height*3);
+    for (unsigned int j = 0; j < img_data.size(); j++)
+        img_data[j] = 0.0;
+
+    /*
     bb_compute(padding);
 
 
@@ -314,10 +319,8 @@ void CNNDetector::process(std::vector<float> &image_v)
                 put_pixel(img_data, max_x, j, 2, color[2]);
             }
     }
+    */
 
-
-
-/*
     float alpha = 0.3;
     for (unsigned int k = 0; k < 3; k++)
         for (unsigned int j = padding; j < image_height - padding; j++)
@@ -342,7 +345,7 @@ void CNNDetector::process(std::vector<float> &image_v)
                 }
 
             }
-*/
+
     ImageSave image(image_width, image_height, false);
     image.save("result/result.png", img_data);
 }

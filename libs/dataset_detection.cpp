@@ -40,11 +40,12 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
         }
     }
 
+    unsigned int background_downscale = json.result["background downscale"].asInt();
     for (unsigned int i = 0; i < json.result["background"].size(); i++)
     {
         std::string dir = json.result["background"][i].asString();
         std::cout << "loading background from " << dir << "\n";
-        load_images(background, dir, 1);
+        load_images(background, dir, background_downscale);
     }
 
 
