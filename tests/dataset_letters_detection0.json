@@ -6,12 +6,12 @@
 
     "background downscale"  : 2,
 
-    "threshold"                 : 0.1,
-    "alpha"                     : 0.1,
+    "threshold"                 : 0.75,
+    "alpha"                     : 0.01,
     "foreground inversion"      : true,
     "background inversion"      : false,
     "noise"                     : 0.1,
-    "luma_noise"                : 0.2,
+    "luma_noise"                : 0.05,
 
 
     "background"     :
@@ -32,7 +32,7 @@
             ]
         },
         {
-            "downscale"  : 4,
+            "downscale"  : 2,
             "dirs"       :
             [
                 "/home/michal/dataset/images_dataset/font_real/1",
