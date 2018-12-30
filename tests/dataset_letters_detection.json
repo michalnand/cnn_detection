@@ -9,7 +9,7 @@
     "white noise"               : 0.1,
     "luma noise"                : 0.2,
     "rotation noise"            : 15.0,
-    "shift noise"               : 3,
+    "shift noise"               : 2,
     "mix threshold"             : 0.75,
 
 

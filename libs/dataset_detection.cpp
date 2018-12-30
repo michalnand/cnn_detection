@@ -46,7 +46,7 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
         load_images(background, dir, background_downscale);
     }
 
-
+    unsigned int augmentation_count = 4;
 
 
 
@@ -57,42 +57,48 @@ DatasetDetection::DatasetDetection(std::string json_file_name)
     for (unsigned int item_id = 0; item_id < foreground[class_id].size(); item_id++)
     {
         unsigned int background_idx = rand()%background.size();
-
-        auto result_true = process_image(   background[background_idx],
-                                            foreground[class_id][item_id],
-                                            true );
-
-        auto result_false = process_image(  background[background_idx],
-                                            foreground[class_id][item_id],
-                                            false);
-
-        sDatasetItem item_true;
-
-        item_true.input = result_true;
-        item_true.output.resize(classes_count);
-        for (unsigned int i = 0; i < classes_count; i++)
-            item_true.output[i] = 0.0;
-        item_true.output[class_id + 1] = 1.0;
-
-        sDatasetItem item_false;
-
-        item_false.input = result_false;
-        item_false.output.resize(classes_count);
-        for (unsigned int i = 0; i < classes_count; i++)
-            item_false.output[i] = 0.0;
-        item_false.output[0] = 1.0;
-
-
-
+        bool put_to_testing = false;
         if (rndf(0.0, 1.0) < training_testing_ratio)
+            put_to_testing = true;
+
+        for (unsigned int i = 0; i < augmentation_count; i++)
         {
-            add_testing(item_true);
-            add_testing(item_false);
-        }
-        else
-        {
-            add_training(item_true);
-            add_training(item_false);
+            auto result_true = process_image(   background[background_idx],
+                                                foreground[class_id][item_id],
+                                                true );
+
+            auto result_false = process_image(  background[background_idx],
+                                                foreground[class_id][item_id],
+                                                false);
+
+            sDatasetItem item_true;
+
+            item_true.input = result_true;
+            item_true.output.resize(classes_count);
+            for (unsigned int i = 0; i < classes_count; i++)
+                item_true.output[i] = 0.0;
+            item_true.output[class_id + 1] = 1.0;
+
+            sDatasetItem item_false;
+
+            item_false.input = result_false;
+            item_false.output.resize(classes_count);
+            for (unsigned int i = 0; i < classes_count; i++)
+                item_false.output[i] = 0.0;
+            item_false.output[0] = 1.0;
+
+
+
+            if (put_to_testing)
+            {
+                add_testing(item_true);
+                add_testing(item_false);
+            }
+            else
+            {
+                add_training(item_true);
+                add_training(item_false);
+            }
         }
     }
 
