@@ -1,0 +1,44 @@
+{
+    "grayscale"     :   false,
+    "width"         :   64,
+    "height"        :   64,
+
+    "max items per folder"  : 50000,
+    "classes count"         : 4,
+
+    "testing ratio" : 0.2,
+
+    "dataset" :
+        [
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/images_dataset_new/city/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/images_dataset_new/mountains/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/images_dataset_new/office/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/images_dataset_new/paper/"
+            },
+
+            {
+                "class" : 1,
+                "path"  :  "/home/michal/dataset/images_dataset_new/text/"
+            },
+            {
+                "class" : 2,
+                "path"  :  "/home/michal/dataset/images_dataset_new/code/"
+            },
+            {
+                "class" : 3,
+                "path"  :  "/home/michal/dataset/images_dataset_new/faces/"
+            }
+        ]
+
+}

@@ -9,9 +9,8 @@
     "network_architecture" :
     {
         "network_log_file_name" : "networks/net_0/network.log",
-
         "input_geometry"     : [64, 64, 3],
-        "output_geometry"    : [1, 1, 2],
+        "output_geometry"    : [1, 1, 4],
 
         "hyperparameters" :
         {
@@ -25,9 +24,42 @@
 
         "layers"         :
         [
+            {
+              "type"      : "convolution",
+              "geometry"  : [3, 3, 8]
+            },
+            {
+              "type"      : "relu"
+            },
+            {
+                "type"      : "max pooling",
+                "geometry"  : [2, 2, 1]
+            },
+
 
           {
-            "type"      : "convolution",
+            "type"      : "dense convolution",
+            "geometry"  : [3, 3, 8]
+          },
+          {
+            "type"      : "relu"
+          },
+          {
+            "type"      : "dense convolution",
+            "geometry"  : [3, 3, 8]
+          },
+          {
+            "type"      : "relu"
+          },
+          {
+            "type"      : "dense convolution",
+            "geometry"  : [3, 3, 8]
+          },
+          {
+            "type"      : "relu"
+          },
+          {
+            "type"      : "dense convolution",
             "geometry"  : [3, 3, 8]
           },
           {
@@ -35,7 +67,49 @@
           },
           {
             "type"      : "convolution",
-            "geometry"  : [3, 3, 16]
+            "geometry"  : [1, 1, 16]
+          },
+          {
+            "type"      : "relu"
+          },
+          {
+            "type"      : "max pooling",
+            "geometry"  : [2, 2, 1]
+          },
+
+
+
+          {
+            "type"      : "dense convolution",
+            "geometry"  : [3, 3, 8]
+          },
+          {
+            "type"      : "relu"
+          },
+          {
+            "type"      : "dense convolution",
+            "geometry"  : [3, 3, 8]
+          },
+          {
+            "type"      : "relu"
+          },
+          {
+            "type"      : "dense convolution",
+            "geometry"  : [3, 3, 8]
+          },
+          {
+            "type"      : "relu"
+          },
+          {
+            "type"      : "dense convolution",
+            "geometry"  : [3, 3, 8]
+          },
+          {
+            "type"      : "relu"
+          },
+          {
+            "type"      : "convolution",
+            "geometry"  : [1, 1, 32]
           },
           {
             "type"      : "relu"
@@ -53,32 +127,11 @@
           {
             "type"      : "relu"
           },
-          {
-            "type"      : "convolution",
-            "geometry"  : [3, 3, 32]
-          },
-          {
-            "type"      : "relu"
-          },
-
-          {
-            "type"      : "max pooling",
-            "geometry"  : [2, 2, 1]
-          },
-
-
-          {
-            "type"      : "convolution",
-            "geometry"  : [3, 3, 32]
-          },
-          {
-            "type"      : "relu"
-          },
-
 
           {
             "type"      : "dropout"
           },
+
           {
             "type"      : "output"
           }

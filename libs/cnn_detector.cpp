@@ -258,7 +258,7 @@ void CNNDetector::process(std::vector<float> &image_v)
         {
             float conf_best = result.confidence_result[max_k][j][i];
             float conf = result.confidence_result[k][j][i];
-            if (conf > 0.99)
+            if (conf > 0.9)
             if (conf > conf_best)
                 max_k = k;
         }
@@ -328,7 +328,7 @@ void CNNDetector::process(std::vector<float> &image_v)
             {
                 unsigned int idx = (k*image_height + j)*image_width + i;
                 unsigned int res_j = (j)/height_ratio;
-                unsigned int res_i = (i - padding)/width_ratio;
+                unsigned int res_i = (i)/width_ratio;
 
 
                 //img_data[idx] = alpha*image_v[idx] + (1.0 - alpha)*result.confidence_result[k][res_j][res_i];
