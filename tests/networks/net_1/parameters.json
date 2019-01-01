@@ -9,7 +9,6 @@
     "network_architecture" :
     {
         "network_log_file_name" : "networks/net_1/network.log",
-
         "input_geometry"     : [64, 64, 3],
         "output_geometry"    : [1, 1, 4],
 
