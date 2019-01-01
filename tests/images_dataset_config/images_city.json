@@ -1,5 +1,5 @@
 {
-    "output prefix"     : "/home/michal/dataset/images_dataset_new/city/city_",
+    "output prefix"     : "/home/michal/dataset/images_dataset/city/city_",
     "output size"       : 64,
     "output stride"     : 32,
     "crop"              : 16,
@@ -11,7 +11,7 @@
 
     "input dirs"    :
     [
-        "/home/michal/dataset/images_dataset_new/source/city_source/"
+        "/home/michal/dataset/images_dataset_source/city/"
     ],
 
     "use background"  : false

@@ -258,7 +258,7 @@ void CNNDetector::process(std::vector<float> &image_v)
         {
             float conf_best = result.confidence_result[max_k][j][i];
             float conf = result.confidence_result[k][j][i];
-            if (conf > 0.9)
+            if (conf > 0.95)
             if (conf > conf_best)
                 max_k = k;
         }
@@ -334,6 +334,7 @@ void CNNDetector::process(std::vector<float> &image_v)
                 //img_data[idx] = alpha*image_v[idx] + (1.0 - alpha)*result.confidence_result[k][res_j][res_i];
 
                 unsigned int class_id = result.class_result[res_j][res_i];
+                //if ((class_id == 1)||(class_id == 3))
                 if (class_id != 0)
                 {
                     float v = alpha*image_v[idx] + (1.0 - alpha)*class_color(class_id, output_depth-1)[k];

@@ -1,5 +1,5 @@
 {
-    "output prefix"     : "/home/michal/dataset/images_dataset_new/mountains/mountains_",
+    "output prefix"     : "/home/michal/dataset/images_dataset/mountains/mountains_",
     "output size"       : 64,
     "output stride"     : 32,
     "crop"              : 16,
@@ -11,7 +11,7 @@
 
     "input dirs"    :
     [
-        "/home/michal/dataset/images_dataset_new/source/mountains_source/"
+        "/home/michal/dataset/images_dataset_source/mountains/"
     ],
 
     "use background"  : false

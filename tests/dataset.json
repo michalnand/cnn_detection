@@ -6,38 +6,38 @@
     "max items per folder"  : 50000,
     "classes count"         : 4,
 
-    "testing ratio" : 0.2,
+    "testing ratio" : 0.1,
 
     "dataset" :
         [
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset_new/city/"
+                "path"  :  "/home/michal/dataset/images_dataset/city/"
             },
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset_new/mountains/"
+                "path"  :  "/home/michal/dataset/images_dataset/mountains/"
             },
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset_new/office/"
+                "path"  :  "/home/michal/dataset/images_dataset/office/"
             },
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset_new/paper/"
+                "path"  :  "/home/michal/dataset/images_dataset/paper/"
             },
 
             {
                 "class" : 1,
-                "path"  :  "/home/michal/dataset/images_dataset_new/text/"
+                "path"  :  "/home/michal/dataset/images_dataset/text/"
             },
             {
                 "class" : 2,
-                "path"  :  "/home/michal/dataset/images_dataset_new/code/"
+                "path"  :  "/home/michal/dataset/images_dataset/code/"
             },
             {
                 "class" : 3,
-                "path"  :  "/home/michal/dataset/images_dataset_new/faces/"
+                "path"  :  "/home/michal/dataset/images_dataset/faces/"
             }
         ]
 

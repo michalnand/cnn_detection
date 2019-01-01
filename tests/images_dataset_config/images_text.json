@@ -1,8 +1,8 @@
 {
-    "output prefix"     : "/home/michal/dataset/images_dataset_new/text/text_",
+    "output prefix"     : "/home/michal/dataset/images_dataset/text/text_",
     "output size"       : 64,
-    "output stride"     : 32,
-    "crop"              : 32,
+    "output stride"     : 16,
+    "crop"              : 64,
     "max images count"  : 50000,
 
     "white noise"       : 0.1,
@@ -12,10 +12,10 @@
 
     "input dirs"    :
     [
-        "/home/michal/dataset/images_dataset_new/source/text_source/"
+        "/home/michal/dataset/images_dataset_source/text/"
     ],
 
-
+ 
     "use background"    : true,
     "background parameters":
     {
@@ -23,10 +23,10 @@
         "background images per dir" : 2000,
         "background dirs"   :
         [
-            "/home/michal/dataset/images_dataset_new/paper/",
-            "/home/michal/dataset/images_dataset_new/mountains/",
-            "/home/michal/dataset/images_dataset_new/office/",
-            "/home/michal/dataset/images_dataset_new/city/"
+            "/home/michal/dataset/images_dataset/paper/",
+            "/home/michal/dataset/images_dataset/mountains/",
+            "/home/michal/dataset/images_dataset/office/",
+            "/home/michal/dataset/images_dataset/city/"
         ]
     }
 }

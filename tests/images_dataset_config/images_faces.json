@@ -1,8 +1,8 @@
 {
-    "output prefix"     : "/home/michal/dataset/images_dataset_new/faces/faces_",
+    "output prefix"     : "/home/michal/dataset/images_dataset/faces/faces_",
     "output size"       : 64,
-    "output stride"     : 32,
-    "crop"              : 16,
+    "output stride"     : 16,
+    "crop"              : 32,
     "max images count"  : 50000,
 
     "white noise"       : 0.1,
@@ -11,7 +11,7 @@
 
     "input dirs"    :
     [
-        "/home/michal/dataset/images_dataset_new/source/faces_source/"
+        "/home/michal/dataset/images_dataset_source/faces/"
     ],
 
     "use background"  : false

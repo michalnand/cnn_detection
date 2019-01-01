@@ -1,17 +1,17 @@
 {
-    "output prefix"     : "/home/michal/dataset/images_dataset_new/office/office_",
+    "output prefix"     : "/home/michal/dataset/images_dataset/office/office_",
     "output size"       : 64,
     "output stride"     : 32,
     "crop"              : 16,
     "max images count"  : 25000,
 
     "white noise"       : 0.1,
-    "luma noise"        : 0.1,
+    "luma noise"        : 0.1, 
     "angle noise"       : 0.0,
 
     "input dirs"    :
     [
-        "/home/michal/dataset/images_dataset_new/source/office_source/"
+        "/home/michal/dataset/images_dataset_source/office/"
     ],
 
     "use background"  : false

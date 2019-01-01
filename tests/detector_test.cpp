@@ -40,9 +40,9 @@ sImagePadded load_image(std::string file_name)
 
 int main()
 {
-	auto image = load_image("images/id_01.png");
- 
-	CNNDetector detector("networks/net_2/trained/cnn_config.json", image.width, image.height);
+	auto image = load_image("images/id_03.jpg");
+
+	CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 
 
 	detector.process(image.data);

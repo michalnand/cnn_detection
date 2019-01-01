@@ -29,7 +29,6 @@ int main()
 		experiment.run();
 	}
 
-
 	std::cout << "program done\n";
 
  	return 0;
