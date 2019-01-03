@@ -1,0 +1,17 @@
+{
+    "output prefix"     : "/home/michal/dataset/images_dataset/abstract/abstract_",
+    "output size"       : 64,
+    "output stride"     : 32,
+    "crop"              : 16,
+    "max images count"  : 50000,
+
+    "white noise"       : 0.05,
+    "luma noise"        : 0.1,
+    "angle noise"       : 15.0,
+
+
+    "input dirs"    :
+    [
+        "/home/michal/dataset/images_dataset_source/abstract/"
+    ]
+}

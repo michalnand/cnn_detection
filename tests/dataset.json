@@ -12,29 +12,24 @@
         [
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset/city/"
-            },
-            {
-                "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset/mountains/"
-            },
-            {
-                "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset/office/"
+                "path"  :  "/home/michal/dataset/images_dataset/abstract/"
             },
             {
                 "class" : 0,
                 "path"  :  "/home/michal/dataset/images_dataset/paper/"
             },
 
+
             {
                 "class" : 1,
                 "path"  :  "/home/michal/dataset/images_dataset/text/"
             },
+
             {
                 "class" : 2,
                 "path"  :  "/home/michal/dataset/images_dataset/code/"
             },
+
             {
                 "class" : 3,
                 "path"  :  "/home/michal/dataset/images_dataset/faces/"

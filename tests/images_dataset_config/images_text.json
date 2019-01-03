@@ -1,8 +1,8 @@
 {
     "output prefix"     : "/home/michal/dataset/images_dataset/text/text_",
     "output size"       : 64,
-    "output stride"     : 16,
-    "crop"              : 64,
+    "output stride"     : 10,
+    "crop"              : 8,
     "max images count"  : 50000,
 
     "white noise"       : 0.1,
@@ -12,21 +12,19 @@
 
     "input dirs"    :
     [
-        "/home/michal/dataset/images_dataset_source/text/"
+        "/home/michal/dataset/images_dataset_source/text_pdf/bin/images/"
     ],
 
- 
+
     "use background"    : true,
     "background parameters":
     {
         "threshold"                 : 0.5,
-        "background images per dir" : 2000,
+        "background images per dir" : 20000,
         "background dirs"   :
         [
             "/home/michal/dataset/images_dataset/paper/",
-            "/home/michal/dataset/images_dataset/mountains/",
-            "/home/michal/dataset/images_dataset/office/",
-            "/home/michal/dataset/images_dataset/city/"
+            "/home/michal/dataset/images_dataset/abstract/"
         ]
     }
 }
