@@ -12,53 +12,61 @@
         [
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset/abstract/"
+                "path"  :  "/home/michal/dataset/marker_detection/background/0/"
             },
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset/city/"
+                "path"  :  "/home/michal/dataset/marker_detection/background/1/"
             },
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset/mountains/"
+                "path"  :  "/home/michal/dataset/marker_detection/background/2/"
             },
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset/office/"
+                "path"  :  "/home/michal/dataset/marker_detection/background/3/"
             },
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/images_dataset/paper/"
+                "path"  :  "/home/michal/dataset/marker_detection/background/4/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/marker_detection/background/5/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/marker_detection/background/6/"
             },
 
 
             {
                 "class" : 1,
-                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/16/"
+                "path"  :  "/home/michal/dataset/marker_detection/aruco_code/16/"
             },
             {
                 "class" : 1,
-                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/24/"
+                "path"  :  "/home/michal/dataset/marker_detection/aruco_code/24/"
             },
             {
                 "class" : 1,
-                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/32/"
+                "path"  :  "/home/michal/dataset/marker_detection/aruco_code/32/"
             },
             {
                 "class" : 1,
-                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/40/"
+                "path"  :  "/home/michal/dataset/marker_detection/aruco_code/40/"
             },
             {
                 "class" : 1,
-                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/48/"
+                "path"  :  "/home/michal/dataset/marker_detection/aruco_code/48/"
             },
             {
                 "class" : 1,
-                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/56/"
+                "path"  :  "/home/michal/dataset/marker_detection/aruco_code/56/"
             },
             {
                 "class" : 1,
-                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/64/"
+                "path"  :  "/home/michal/dataset/marker_detection/aruco_code/64/"
             }
         ]
 
