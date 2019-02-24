@@ -103,27 +103,28 @@ std::vector<float> ImageAugmentation::process( std::vector<float> &input,
             }
     }
 
+    if ((rand()%2) == 0)
+    {
+        float r_noise = rnd(-color_noise, color_noise);
+        float g_noise = rnd(-color_noise, color_noise);
+        float b_noise = rnd(-color_noise, color_noise);
 
-    float r_noise = rnd(-color_noise, color_noise);
-    float g_noise = rnd(-color_noise, color_noise);
-    float b_noise = rnd(-color_noise, color_noise);
+        for (unsigned int j = 0; j < height; j++)
+            for (unsigned int i = 0; i < width; i++)
+            {
+                float r = result[(0*height + j)*width + i];
+                float g = result[(1*height + j)*width + i];
+                float b = result[(2*height + j)*width + i];
 
-    for (unsigned int j = 0; j < height; j++)
-        for (unsigned int i = 0; i < width; i++)
-        {
-            float r = result[(0*height + j)*width + i];
-            float g = result[(1*height + j)*width + i];
-            float b = result[(2*height + j)*width + i];
+                r = r + r_noise + rnd(-1, 1)*white_noise;
+                g = g + g_noise + rnd(-1, 1)*white_noise;
+                b = b + b_noise + rnd(-1, 1)*white_noise;
 
-            r = r + r_noise + rnd(-1, 1)*white_noise;
-            g = g + g_noise + rnd(-1, 1)*white_noise;
-            b = b + b_noise + rnd(-1, 1)*white_noise;
-
-            result[(0*height + j)*width + i] = r;
-            result[(1*height + j)*width + i] = g;
-            result[(2*height + j)*width + i] = b;
-        }
-
+                result[(0*height + j)*width + i] = r;
+                result[(1*height + j)*width + i] = g;
+                result[(2*height + j)*width + i] = b;
+            }
+    }
 
     unsigned int filter_size = 1;
     switch (rand()%3)

@@ -31,14 +31,14 @@ int main()
 
             {
                 auto result = image_augmentation.process(code_image, code_size, code_size, false);
-                std::string file_name = "/home/michal/dataset/dataset_images/aruco_code/" + std::to_string(code_size) + "/" + std::to_string(id) + ".png";
+                std::string file_name = "/home/michal/dataset/marker_detection/aruco_code/" + std::to_string(code_size) + "/" + std::to_string(id) + ".png";
                 image.save(file_name, result);
                 id++;
             }
 
             {
                 auto result = image_augmentation.process(code_image, code_size, code_size, true);
-                std::string file_name = "/home/michal/dataset/dataset_images/background/" + std::to_string(back_id%10) + "/" + std::to_string(back_id) + ".png";
+                std::string file_name = "/home/michal/dataset/marker_detection/background/" + std::to_string(back_id%10) + "/" + std::to_string(back_id) + ".png";
                 image.save(file_name, result);
                 back_id++;
             }

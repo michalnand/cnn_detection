@@ -8,14 +8,14 @@
     "offset noise": 8,
     "angle noise" : 45,
 
-    "max files per folder" : 5000,
+    "max files per folder" : 8000,
 
     "background images" :
     [
-        "/home/michal/dataset/dataset_images/abstract/",
         "/home/michal/dataset/dataset_images/city/",
-        "/home/michal/dataset/dataset_images/mountains/",
         "/home/michal/dataset/dataset_images/office/",
-        "/home/michal/dataset/dataset_images/industry/"
+        "/home/michal/dataset/dataset_images/industry/",
+        "/home/michal/dataset/dataset_images/mountains/",
+        "/home/michal/dataset/dataset_images/squares/"
     ],
 }

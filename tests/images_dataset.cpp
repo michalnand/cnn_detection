@@ -19,9 +19,13 @@ int main()
     {
         ImagesSplit split("images_dataset_config/images_industry.json");
     }
-    */
     {
         ImagesSplit split("images_dataset_config/images_mountains.json");
+    }
+    */
+
+    {
+        ImagesSplit split("images_dataset_config/images_squares.json");
     }
 
 
