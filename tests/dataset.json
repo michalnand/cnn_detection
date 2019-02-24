@@ -3,8 +3,8 @@
     "width"         :   64,
     "height"        :   64,
 
-    "max items per folder"  : 50000,
-    "classes count"         : 4,
+    "max items per folder"  : 5000,
+    "classes count"         : 2,
 
     "testing ratio" : 0.1,
 
@@ -16,23 +16,49 @@
             },
             {
                 "class" : 0,
+                "path"  :  "/home/michal/dataset/images_dataset/city/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/images_dataset/mountains/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/images_dataset/office/"
+            },
+            {
+                "class" : 0,
                 "path"  :  "/home/michal/dataset/images_dataset/paper/"
             },
 
 
             {
                 "class" : 1,
-                "path"  :  "/home/michal/dataset/images_dataset/text/"
+                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/16/"
             },
-
             {
-                "class" : 2,
-                "path"  :  "/home/michal/dataset/images_dataset/code/"
+                "class" : 1,
+                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/24/"
             },
-
             {
-                "class" : 3,
-                "path"  :  "/home/michal/dataset/images_dataset/faces/"
+                "class" : 1,
+                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/32/"
+            },
+            {
+                "class" : 1,
+                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/40/"
+            },
+            {
+                "class" : 1,
+                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/48/"
+            },
+            {
+                "class" : 1,
+                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/56/"
+            },
+            {
+                "class" : 1,
+                "path"  :  "/home/michal/dataset/images_dataset/aruco_code/64/"
             }
         ]
 

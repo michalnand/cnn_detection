@@ -1,0 +1,21 @@
+{
+    "width"     : 64,
+    "height"    : 64,
+
+
+    "color noise" : 0.2,
+    "white noise" : 0.2,
+    "offset noise": 5,
+    "angle noise" : 45,
+
+    "max files per folder" : 4000,
+
+    "background images" :
+    [
+        "/home/michal/dataset/images_dataset/abstract/",
+        "/home/michal/dataset/images_dataset/city/",
+        "/home/michal/dataset/images_dataset/mountains/",
+        "/home/michal/dataset/images_dataset/office/",
+        "/home/michal/dataset/images_dataset/paper/"
+    ],
+}

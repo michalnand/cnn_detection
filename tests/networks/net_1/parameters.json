@@ -1,21 +1,21 @@
 {
-    "epoch_count"          : 20,
-    "sub_epoch_size"       : 10,
-    "compare_top_5"        : false,
+  "epoch_count"          : 20,
+  "sub_epoch_size"       : 10,
+  "compare_top_5"        : false,
 
-    "epoch_learning_rate_decay" : 18,
-    "learning_rate_decay"       : 0.25,
+  "epoch_learning_rate_decay" : 18,
+  "learning_rate_decay"       : 0.25,
 
     "network_architecture" :
     {
         "network_log_file_name" : "networks/net_1/network.log",
         "input_geometry"     : [64, 64, 3],
-        "output_geometry"    : [1, 1, 4],
+        "output_geometry"    : [1, 1, 2],
 
         "hyperparameters" :
         {
           "init_weight_range" : 0.0,
-          "learning_rate"     : 0.0001,
+          "learning_rate"     : 0.0002,
           "lambda1"           : 0.0000001,
           "lambda2"           : 0.0000001,
           "dropout"           : 0.4,
@@ -24,6 +24,19 @@
 
         "layers"         :
         [
+            {
+              "type"      : "convolution",
+              "geometry"  : [3, 3, 8]
+            },
+            {
+              "type"      : "relu"
+            },
+            {
+                "type"      : "max pooling",
+                "geometry"  : [2, 2, 1]
+            },
+
+
             {
               "type"      : "convolution",
               "geometry"  : [3, 3, 16]
@@ -36,105 +49,21 @@
                 "geometry"  : [2, 2, 1]
             },
 
-          {
-            "type"      : "dense convolution",
-            "geometry"  : [3, 3, 8]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "dense convolution",
-            "geometry"  : [3, 3, 8]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "dense convolution",
-            "geometry"  : [3, 3, 8]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "dense convolution",
-            "geometry"  : [3, 3, 8]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "convolution",
-            "geometry"  : [1, 1, 32]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "max pooling",
-            "geometry"  : [2, 2, 1]
-          },
+            {
+              "type"      : "convolution",
+              "geometry"  : [3, 3, 32]
+            },
+            {
+              "type"      : "relu"
+            },
 
+            {
+                "type"      : "dropout"
+            },
 
-
-          {
-            "type"      : "dense convolution",
-            "geometry"  : [3, 3, 8]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "dense convolution",
-            "geometry"  : [3, 3, 8]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "dense convolution",
-            "geometry"  : [3, 3, 8]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "dense convolution",
-            "geometry"  : [3, 3, 8]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "convolution",
-            "geometry"  : [1, 1, 32]
-          },
-          {
-            "type"      : "relu"
-          },
-          {
-            "type"      : "max pooling",
-            "geometry"  : [2, 2, 1]
-          },
-
-
-          {
-            "type"      : "convolution",
-            "geometry"  : [3, 3, 64]
-          },
-          {
-            "type"      : "relu"
-          },
-
-          {
-            "type"      : "dropout"
-          },
-
-          {
-            "type"      : "output"
-          }
-
+            {
+                "type"      : "output"
+            }
         ]
     }
 }
