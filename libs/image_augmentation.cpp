@@ -34,7 +34,7 @@ ImageAugmentation::~ImageAugmentation()
 {
 
 }
- 
+
 
 std::vector<float> ImageAugmentation::process( std::vector<float> &input,
                                                 unsigned int input_width,
@@ -106,33 +106,23 @@ std::vector<float> ImageAugmentation::process( std::vector<float> &input,
                     result[y2*width + x2 + layer_size*2] = b;
                 }
             }
-            /*
-            unsigned int y = y_transformed;
-            unsigned int x = x_transformed;
-
-
-            if ((y < height) && (x < width))
-            {
-                unsigned int output_idx = y*width + x;
-                unsigned int input_idx  = j*input_width + i;
-
-                float r = input[input_idx + 0*input_layer_size];
-                float g = input[input_idx + 0*input_layer_size];
-                float b = input[input_idx + 0*input_layer_size];
-
-                r = r + r_noise + rnd(-1, 1)*white_noise;
-                g = g + g_noise + rnd(-1, 1)*white_noise;
-                b = b + b_noise + rnd(-1, 1)*white_noise;
-
-                result[output_idx + 0*layer_size] = r;
-                result[output_idx + 1*layer_size] = g;
-                result[output_idx + 2*layer_size] = b;
-            }
-            */
         }
 
+    unsigned int filter_size = 1;
+    switch (rand()%3)
+    {
+        case 0: filter_size = 1; break;
+        case 1: filter_size = 3; break;
+        case 2: filter_size = 5; break;
+    }
 
-    return result;
+    std::vector<float> filtered_result;
+    if (filter_size != 1)
+        filtered_result = filter(result, width, height, filter_size);
+    else
+        filtered_result = result;
+
+    return filtered_result;
 }
 
 void ImageAugmentation::load_images(    std::vector<std::vector<float>> &result,
@@ -184,6 +174,36 @@ void ImageAugmentation::load_images(    std::vector<std::vector<float>> &result,
                 return;
         }
     }
+}
+
+
+std::vector<float> ImageAugmentation::filter(std::vector<float> &input, unsigned int width, unsigned int height, unsigned int size)
+{
+    std::vector<float> result = input;
+
+    float w = 0.5/size;
+
+    unsigned int size_half = size/2;
+    for (unsigned int ch = 0; ch < 3; ch++)
+        for (unsigned int y = 0; y < height - size_half; y++)
+            for (unsigned int x = 0; x < width - size_half; x++)
+            {
+                float sum = 0.0;
+                for (unsigned int ky = 0; ky < size; ky++)
+                    for (unsigned int kx = 0; kx < size; kx++)
+                    {
+                        unsigned int input_idx;
+                        input_idx = (ch*height + (y + ky))*width + (x + kx);
+                        sum+= input[input_idx]*w;
+                    }
+
+                unsigned int output_idx =  (ch*height + y + size_half)*width + x + size_half;
+
+                result[output_idx] = sum;
+            }
+
+
+    return result;
 }
 
 

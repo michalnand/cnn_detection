@@ -37,7 +37,7 @@ class CNNDetector
         CNNDetector(std::string network_config_file_name, unsigned int image_width, unsigned int image_height);
         virtual ~CNNDetector();
 
-        void process(std::vector<float> &image_v);
+        void process(std::string output_file_name, std::vector<float> &image_v);
 
 
     private:

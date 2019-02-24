@@ -22,6 +22,7 @@ class ImageAugmentation
                             unsigned int width,
                             unsigned height);
 
+        std::vector<float> filter(std::vector<float> &input, unsigned int width, unsigned int height, unsigned int size);
         float rnd(float min, float max);
 
 

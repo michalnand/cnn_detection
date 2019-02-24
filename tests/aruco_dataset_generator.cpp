@@ -13,7 +13,7 @@ int main()
 
     unsigned int id = 0;
     unsigned int image_size = 64;
-    
+
     ImageAugmentation image_augmentation("marker_config.json");
 
     ImageSave image(image_size, image_size, false);

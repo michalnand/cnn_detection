@@ -2,6 +2,7 @@
 #include <json_config.h>
 #include <iostream>
 #include <image_save.h>
+#include <timer.h>
 
 CNNDetector::CNNDetector(std::string network_config_file_name, unsigned int image_width, unsigned int image_height)
 {
@@ -233,9 +234,15 @@ void CNNDetector::put_pixel(std::vector<float> &image_v, unsigned int x, unsigne
     image_v[idx] = value;
 }
 
-void CNNDetector::process(std::vector<float> &image_v)
+void CNNDetector::process(std::string output_file_name, std::vector<float> &image_v)
 {
+    Timer timer;
+    timer.start();
     nn->forward(nn_output, image_v);
+    timer.stop();
+
+    std::cout << "network time " << timer.get_duration() << "[ms]\n";
+
 
     unsigned int ptr;
 
@@ -254,18 +261,26 @@ void CNNDetector::process(std::vector<float> &image_v)
     for (unsigned int j = 0; j < output_height; j++)
     for (unsigned int i = 0; i < output_width; i++)
     {
+
         unsigned int max_k = 0;
         for (unsigned int k = 0; k < output_depth; k++)
         {
             float conf_best = result.confidence_result[max_k][j][i];
             float conf = result.confidence_result[k][j][i];
             if (k != 0)
-            //if (conf > 0.5)
-            if (conf > conf_best)
+            if (conf > 0.95)
                 max_k = k;
         }
 
         result.class_result[j][i] = max_k;
+
+        /*
+        if (result.confidence_result[1][j][i] > result.confidence_result[0][j][i])
+            result.class_result[j][i] = 1;
+        else
+            result.class_result[j][i] = 0;
+        */
+
     }
 
     unsigned int padding = 16;
@@ -350,7 +365,7 @@ void CNNDetector::process(std::vector<float> &image_v)
             }
 
     ImageSave image(image_width, image_height, false);
-    image.save("result/result.png", img_data);
+    image.save(output_file_name, img_data);
 }
 
 void CNNDetector::result_init()
