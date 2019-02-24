@@ -11,7 +11,7 @@ int main()
 {
     srand(time(NULL));
 
-    unsigned int id = 0;
+    unsigned int id = 0, back_id = 0;
     unsigned int image_size = 64;
 
     ImageAugmentation image_augmentation("marker_config.json");
@@ -27,12 +27,21 @@ int main()
 
         for (unsigned int i = 0; i < 10000; i++)
         {
-            auto background = code_generator.get(rand()%code_generator.get_count());
-            auto result = image_augmentation.process(background, code_size, code_size);
+            auto code_image = code_generator.get(rand()%code_generator.get_count());
 
-            std::string file_name = "/home/michal/dataset/images_dataset/aruco_code/" + std::to_string(code_size) + "/" + std::to_string(id) + ".png";
-            image.save(file_name, result);
-            id++;
+            {
+                auto result = image_augmentation.process(code_image, code_size, code_size, false);
+                std::string file_name = "/home/michal/dataset/dataset_images/aruco_code/" + std::to_string(code_size) + "/" + std::to_string(id) + ".png";
+                image.save(file_name, result);
+                id++;
+            }
+
+            {
+                auto result = image_augmentation.process(code_image, code_size, code_size, true);
+                std::string file_name = "/home/michal/dataset/dataset_images/background/" + std::to_string(back_id%10) + "/" + std::to_string(back_id) + ".png";
+                image.save(file_name, result);
+                back_id++;
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 {
-    "output prefix"     : "/home/michal/dataset/dataset_images/abstract/abstract_",
+    "output prefix"     : "/home/michal/dataset/dataset_images/industry/industry_",
     "output size"       : 64,
     "output stride"     : 32,
     "crop"              : 16,
@@ -12,6 +12,6 @@
 
     "input dirs"    :
     [
-        "/home/michal/dataset/dataset_images_source/abstract/"
+        "/home/michal/dataset/dataset_images_source/industry/"
     ]
 }

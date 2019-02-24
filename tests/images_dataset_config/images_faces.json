@@ -5,14 +5,12 @@
     "crop"              : 32,
     "max images count"  : 50000,
 
-    "white noise"       : 0.1,
-    "luma noise"        : 0.1,
+    "white noise"       : 0.0,
+    "luma noise"        : 0.0,
     "angle noise"       : 0.0,
 
     "input dirs"    :
     [
         "/home/michal/dataset/images_dataset_source/faces/"
-    ],
-
-    "use background"  : false
+    ]
 }

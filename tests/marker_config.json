@@ -5,17 +5,17 @@
 
     "color noise" : 0.2,
     "white noise" : 0.2,
-    "offset noise": 5,
+    "offset noise": 8,
     "angle noise" : 45,
 
-    "max files per folder" : 4000,
+    "max files per folder" : 5000,
 
     "background images" :
     [
-        "/home/michal/dataset/images_dataset/abstract/",
-        "/home/michal/dataset/images_dataset/city/",
-        "/home/michal/dataset/images_dataset/mountains/",
-        "/home/michal/dataset/images_dataset/office/",
-        "/home/michal/dataset/images_dataset/paper/"
+        "/home/michal/dataset/dataset_images/abstract/",
+        "/home/michal/dataset/dataset_images/city/",
+        "/home/michal/dataset/dataset_images/mountains/",
+        "/home/michal/dataset/dataset_images/office/",
+        "/home/michal/dataset/dataset_images/industry/"
     ],
 }

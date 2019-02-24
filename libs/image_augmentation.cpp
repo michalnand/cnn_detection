@@ -38,7 +38,8 @@ ImageAugmentation::~ImageAugmentation()
 
 std::vector<float> ImageAugmentation::process( std::vector<float> &input,
                                                 unsigned int input_width,
-                                                unsigned int input_height)
+                                                unsigned int input_height,
+                                                bool is_background)
 {
     std::vector<float> result;
 
@@ -47,66 +48,82 @@ std::vector<float> ImageAugmentation::process( std::vector<float> &input,
     unsigned int layer_size = width*height;
     unsigned int input_layer_size = input_width*input_height;
 
+    if (is_background == false)
+    {
+        float x_offset = rnd(-offset_noise, offset_noise);
+        float y_offset = rnd(-offset_noise, offset_noise);
+
+        float angle = 2.0*3.141592654*rnd(-angle_noise, angle_noise)/360.0;
+
+        for (unsigned int j = 0; j < input_height; j++)
+            for (unsigned int i = 0; i < input_width; i++)
+            {
+                float x_ = i - input_width/2.0;
+                float y_ = j - input_height/2.0;
+
+                float x_transformed = (height)/2.0 + y_offset + x_*cos(angle) - y_*sin(angle);
+                float y_transformed = (width)/2.0 + x_offset + x_*sin(angle) + y_*cos(angle);
+
+
+                if ((x_transformed > 0.0)&&(y_transformed > 0.0)&&(x_transformed < width)&&(y_transformed < height))
+                {
+                    unsigned int input_idx  = j*input_width + i;
+
+                    float r = input[input_idx + 0*input_layer_size];
+                    float g = input[input_idx + 1*input_layer_size];
+                    float b = input[input_idx + 2*input_layer_size];
+
+                    unsigned int x = x_transformed;
+                    unsigned int y = y_transformed;
+
+                    result[y*width + x + layer_size*0] = r;
+                    result[y*width + x + layer_size*1] = g;
+                    result[y*width + x + layer_size*2] = b;
+
+                    unsigned int x1 = x_transformed + 1;
+                    unsigned int y1 = y_transformed + 0;
+
+                    if ((x1 < width)&&(y1 < height))
+                    {
+                        result[y1*width + x1 + layer_size*0] = r;
+                        result[y1*width + x1 + layer_size*1] = g;
+                        result[y1*width + x1 + layer_size*2] = b;
+                    }
+
+                    unsigned int x2 = x_transformed + 0;
+                    unsigned int y2 = y_transformed + 1;
+
+                    if ((x2 < width)&&(y2 < height))
+                    {
+                        result[y2*width + x2 + layer_size*0] = r;
+                        result[y2*width + x2 + layer_size*1] = g;
+                        result[y2*width + x2 + layer_size*2] = b;
+                    }
+                }
+            }
+    }
+
+
     float r_noise = rnd(-color_noise, color_noise);
     float g_noise = rnd(-color_noise, color_noise);
     float b_noise = rnd(-color_noise, color_noise);
 
-    float x_offset = rnd(-offset_noise, offset_noise);
-    float y_offset = rnd(-offset_noise, offset_noise);
-
-    float angle = 2.0*3.141592654*rnd(-angle_noise, angle_noise)/360.0;
-
-    for (unsigned int j = 0; j < input_height; j++)
-        for (unsigned int i = 0; i < input_width; i++)
+    for (unsigned int j = 0; j < height; j++)
+        for (unsigned int i = 0; i < width; i++)
         {
-            float x_ = i - input_width/2.0;
-            float y_ = j - input_height/2.0;
+            float r = result[(0*height + j)*width + i];
+            float g = result[(1*height + j)*width + i];
+            float b = result[(2*height + j)*width + i];
 
-            float x_transformed = (height)/2.0 + y_offset + x_*cos(angle) - y_*sin(angle);
-            float y_transformed = (width)/2.0 + x_offset + x_*sin(angle) + y_*cos(angle);
+            r = r + r_noise + rnd(-1, 1)*white_noise;
+            g = g + g_noise + rnd(-1, 1)*white_noise;
+            b = b + b_noise + rnd(-1, 1)*white_noise;
 
-
-            if ((x_transformed > 0.0)&&(y_transformed > 0.0)&&(x_transformed < width)&&(y_transformed < height))
-            {
-                unsigned int input_idx  = j*input_width + i;
-
-                float r = input[input_idx + 0*input_layer_size];
-                float g = input[input_idx + 1*input_layer_size];
-                float b = input[input_idx + 2*input_layer_size];
-
-                r = r + r_noise + rnd(-1, 1)*white_noise;
-                g = g + g_noise + rnd(-1, 1)*white_noise;
-                b = b + b_noise + rnd(-1, 1)*white_noise;
-
-
-                unsigned int x = x_transformed;
-                unsigned int y = y_transformed;
-
-                result[y*width + x + layer_size*0] = r;
-                result[y*width + x + layer_size*1] = g;
-                result[y*width + x + layer_size*2] = b;
-
-                unsigned int x1 = x_transformed + 1;
-                unsigned int y1 = y_transformed + 0;
-
-                if ((x1 < width)&&(y1 < height))
-                {
-                    result[y1*width + x1 + layer_size*0] = r;
-                    result[y1*width + x1 + layer_size*1] = g;
-                    result[y1*width + x1 + layer_size*2] = b;
-                }
-
-                unsigned int x2 = x_transformed + 0;
-                unsigned int y2 = y_transformed + 1;
-
-                if ((x2 < width)&&(y2 < height))
-                {
-                    result[y2*width + x2 + layer_size*0] = r;
-                    result[y2*width + x2 + layer_size*1] = g;
-                    result[y2*width + x2 + layer_size*2] = b;
-                }
-            }
+            result[(0*height + j)*width + i] = r;
+            result[(1*height + j)*width + i] = g;
+            result[(2*height + j)*width + i] = b;
         }
+
 
     unsigned int filter_size = 1;
     switch (rand()%3)

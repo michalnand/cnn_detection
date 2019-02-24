@@ -5,9 +5,9 @@
     "crop"              : 16,
     "max images count"  : 50000,
 
-    "white noise"       : 0.05,
-    "luma noise"        : 0.1,
-    "angle noise"       : 15.0,
+    "white noise"       : 0.0,
+    "luma noise"        : 0.0,
+    "angle noise"       : 0.0,
 
 
     "input dirs"    :

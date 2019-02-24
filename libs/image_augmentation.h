@@ -14,7 +14,8 @@ class ImageAugmentation
 
         std::vector<float> process( std::vector<float> &input,
                                     unsigned int input_width,
-                                    unsigned int input_height);
+                                    unsigned int input_height,
+                                    bool is_background = false);
 
     private:
         void load_images(   std::vector<std::vector<float>> &result,
