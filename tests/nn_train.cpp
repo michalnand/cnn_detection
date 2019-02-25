@@ -13,7 +13,6 @@ int main()
 		ClassificationExperiment experiment(dataset, "networks/net_0/");
 		experiment.run();
 	}
-	/*
 	{
 		ClassificationExperiment experiment(dataset, "networks/net_1/");
 		experiment.run();
@@ -22,6 +21,7 @@ int main()
 		ClassificationExperiment experiment(dataset, "networks/net_2/");
 		experiment.run();
 	}
+	/*
 	{
 		ClassificationExperiment experiment(dataset, "networks/net_3/");
 		experiment.run();

@@ -8,7 +8,7 @@
     "offset noise": 8,
     "angle noise" : 45,
 
-    "max files per folder" : 8000,
+    "max files per folder" : 6000,
 
     "background images" :
     [
