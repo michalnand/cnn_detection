@@ -21,13 +21,12 @@ int main()
 		ClassificationExperiment experiment(dataset, "networks/net_2/");
 		experiment.run();
 	}
-	/*
 	{
 		ClassificationExperiment experiment(dataset, "networks/net_3/");
 		experiment.run();
 	}
-	*/
-	std::cout << "program done\n";
 
+
+	std::cout << "program done\n";
  	return 0;
 }
