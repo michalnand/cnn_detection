@@ -42,54 +42,54 @@ int main()
 {
 	{
 		auto image = load_image("images/hall_0_code_16_40.png");
-		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_0_code_16_40.png", image.data);
 	}
 	{
 		auto image = load_image("images/hall_1_code_16_40.png");
-		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_1_code_16_40.png", image.data);
 	}
 	{
 		auto image = load_image("images/hall_2_code_16_40.png");
-		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_2_code_16_40.png", image.data);
 	}
 	{
 		auto image = load_image("images/hall_3_code_16_40.png");
-		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_3_code_16_40.png", image.data);
 	}
 	{
 		auto image = load_image("images/hall_4_code_16_40.png");
-		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_4_code_16_40.png", image.data);
 	}
 
 
 		{
 			auto image = load_image("images/hall_0_code_64_40.png");
-			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_0_code_64_40.png", image.data);
 		}
 		{
 			auto image = load_image("images/hall_1_code_64_40.png");
-			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_1_code_64_40.png", image.data);
 		}
 		{
 			auto image = load_image("images/hall_2_code_64_40.png");
-			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_2_code_64_40.png", image.data);
 		}
 		{
 			auto image = load_image("images/hall_3_code_64_40.png");
-			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_3_code_64_40.png", image.data);
 		}
 		{
 			auto image = load_image("images/hall_4_code_64_40.png");
-			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_4_code_64_40.png", image.data);
 		}
 

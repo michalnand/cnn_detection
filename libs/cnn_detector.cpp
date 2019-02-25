@@ -276,7 +276,7 @@ void CNNDetector::process(std::string output_file_name, std::vector<float> &imag
         result.class_result[j][i] = max_k;
         */
 
-        if ((result.confidence_result[1][j][i] > result.confidence_result[0][j][i]) && (result.confidence_result[1][j][i] > 0.98))
+        if ((result.confidence_result[1][j][i] > result.confidence_result[0][j][i]) && (result.confidence_result[1][j][i] > 0.93))
             result.class_result[j][i] = 1;
         else
             result.class_result[j][i] = 0;
