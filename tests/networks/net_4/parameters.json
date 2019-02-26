@@ -8,14 +8,14 @@
 
     "network_architecture" :
     {
-        "network_log_file_name" : "networks/net_1/network.log",
+        "network_log_file_name" : "networks/net_4/network.log",
         "input_geometry"     : [64, 64, 3],
         "output_geometry"    : [1, 1, 2],
 
         "hyperparameters" :
         {
           "init_weight_range" : 0.0,
-          "learning_rate"     : 0.0005,
+          "learning_rate"     : 0.0002,
           "lambda1"           : 0.0000001,
           "lambda2"           : 0.0000001,
           "dropout"           : 0.4,
@@ -26,7 +26,7 @@
         [
             {
               "type"      : "convolution",
-              "geometry"  : [3, 3, 8]
+              "geometry"  : [3, 3, 16]
             },
             {
               "type"      : "relu"
@@ -39,7 +39,7 @@
 
             {
               "type"      : "convolution",
-              "geometry"  : [3, 3, 8]
+              "geometry"  : [3, 3, 16]
             },
             {
               "type"      : "relu"
@@ -51,7 +51,7 @@
 
             {
               "type"      : "convolution",
-              "geometry"  : [3, 3, 8]
+              "geometry"  : [3, 3, 16]
             },
             {
               "type"      : "relu"

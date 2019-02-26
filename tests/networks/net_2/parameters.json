@@ -26,6 +26,19 @@
         [
             {
               "type"      : "convolution",
+              "geometry"  : [3, 3, 8]
+            },
+            {
+              "type"      : "relu"
+            },
+            {
+                "type"      : "max pooling",
+                "geometry"  : [2, 2, 1]
+            },
+
+
+            {
+              "type"      : "convolution",
               "geometry"  : [3, 3, 16]
             },
             {
@@ -36,22 +49,9 @@
                 "geometry"  : [2, 2, 1]
             },
 
-
             {
               "type"      : "convolution",
-              "geometry"  : [3, 3, 32]
-            },
-            {
-              "type"      : "relu"
-            },
-            {
-                "type"      : "max pooling",
-                "geometry"  : [2, 2, 1]
-            },
-
-            {
-              "type"      : "convolution",
-              "geometry"  : [3, 3, 64]
+              "geometry"  : [3, 3, 16]
             },
             {
               "type"      : "relu"

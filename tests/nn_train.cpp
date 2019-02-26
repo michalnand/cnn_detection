@@ -25,6 +25,23 @@ int main()
 		ClassificationExperiment experiment(dataset, "networks/net_3/");
 		experiment.run();
 	}
+	{
+		ClassificationExperiment experiment(dataset, "networks/net_4/");
+		experiment.run();
+	}
+	{
+		ClassificationExperiment experiment(dataset, "networks/net_5/");
+		experiment.run();
+	}
+	{
+		ClassificationExperiment experiment(dataset, "networks/net_6/");
+		experiment.run();
+	}
+	{
+		ClassificationExperiment experiment(dataset, "networks/net_7/");
+		experiment.run();
+	}
+	
 
 
 	std::cout << "program done\n";
