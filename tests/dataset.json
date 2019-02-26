@@ -3,7 +3,7 @@
     "width"         :   64,
     "height"        :   64,
 
-    "max items per folder"  : 8000,
+    "max items per folder"  : 6000,
     "classes count"         : 2,
 
     "testing ratio" : 0.1,

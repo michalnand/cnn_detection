@@ -40,57 +40,104 @@ sImagePadded load_image(std::string file_name)
 
 int main()
 {
+
+	/*
 	{
 		auto image = load_image("images/hall_0_code_16_40.png");
-		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_0_code_16_40.png", image.data);
 	}
 	{
 		auto image = load_image("images/hall_1_code_16_40.png");
-		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_1_code_16_40.png", image.data);
 	}
 	{
 		auto image = load_image("images/hall_2_code_16_40.png");
-		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_2_code_16_40.png", image.data);
 	}
 	{
 		auto image = load_image("images/hall_3_code_16_40.png");
-		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_3_code_16_40.png", image.data);
 	}
 	{
 		auto image = load_image("images/hall_4_code_16_40.png");
-		CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+		CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 		detector.process("result/hall_4_code_16_40.png", image.data);
 	}
 
 
 		{
 			auto image = load_image("images/hall_0_code_64_40.png");
-			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_0_code_64_40.png", image.data);
 		}
 		{
 			auto image = load_image("images/hall_1_code_64_40.png");
-			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_1_code_64_40.png", image.data);
 		}
 		{
 			auto image = load_image("images/hall_2_code_64_40.png");
-			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_2_code_64_40.png", image.data);
 		}
 		{
 			auto image = load_image("images/hall_3_code_64_40.png");
-			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_3_code_64_40.png", image.data);
 		}
 		{
 			auto image = load_image("images/hall_4_code_64_40.png");
-			CNNDetector detector("networks/net_0/trained/cnn_config.json", image.width, image.height);
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
 			detector.process("result/hall_4_code_64_40.png", image.data);
+		}
+*/
+
+
+		{
+			auto image = load_image("images/warehouse_00_code_16_40.png");
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			detector.process("result/warehouse_00_code_16_40.png", image.data);
+		}
+		{
+			auto image = load_image("images/warehouse_01_code_16_40.png");
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			detector.process("result/warehouse_01_code_16_40.png", image.data);
+		}
+		{
+			auto image = load_image("images/warehouse_02_code_16_40.png");
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			detector.process("result/warehouse_02_code_16_40.png", image.data);
+		}
+		{
+			auto image = load_image("images/warehouse_03_code_16_40.png");
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			detector.process("result/warehouse_03_code_16_40.png", image.data);
+		}
+
+
+		{
+			auto image = load_image("images/warehouse_00_code_24_40.png");
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			detector.process("result/warehouse_00_code_24_40.png", image.data);
+		}
+		{
+			auto image = load_image("images/warehouse_01_code_24_40.png");
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			detector.process("result/warehouse_01_code_24_40.png", image.data);
+		}
+		{
+			auto image = load_image("images/warehouse_02_code_24_40.png");
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			detector.process("result/warehouse_02_code_24_40.png", image.data);
+		}
+		{
+			auto image = load_image("images/warehouse_03_code_24_40.png");
+			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
+			detector.process("result/warehouse_03_code_24_40.png", image.data);
 		}
 
 

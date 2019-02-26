@@ -77,6 +77,7 @@ int main()
 {
     srand(time(NULL));
 
+    /*
     for (unsigned int code_size = 16; code_size <= 64; code_size+= 8)
     {
         generate_code_image("images/hall_0", code_size, 40);
@@ -84,6 +85,15 @@ int main()
         generate_code_image("images/hall_2", code_size, 40);
         generate_code_image("images/hall_3", code_size, 40);
         generate_code_image("images/hall_4", code_size, 40);
+    }
+    */
+
+    for (unsigned int code_size = 16; code_size <= 64; code_size+= 8)
+    {
+        generate_code_image("images/warehouse_00", code_size, 40);
+        generate_code_image("images/warehouse_01", code_size, 40);
+        generate_code_image("images/warehouse_02", code_size, 40);
+        generate_code_image("images/warehouse_03", code_size, 40);
     }
 
     /*

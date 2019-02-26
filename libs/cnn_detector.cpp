@@ -262,24 +262,26 @@ void CNNDetector::process(std::string output_file_name, std::vector<float> &imag
     for (unsigned int i = 0; i < output_width; i++)
     {
 
-        /*
+
         unsigned int max_k = 0;
         for (unsigned int k = 0; k < output_depth; k++)
         {
             float conf_best = result.confidence_result[max_k][j][i];
             float conf = result.confidence_result[k][j][i];
             if (k != 0)
-            if (conf > 1.0)
+            if (conf > 0.7)
                 max_k = k;
         }
 
         result.class_result[j][i] = max_k;
-        */
 
+
+        /*
         if ((result.confidence_result[1][j][i] > result.confidence_result[0][j][i]) && (result.confidence_result[1][j][i] > 0.93))
             result.class_result[j][i] = 1;
         else
             result.class_result[j][i] = 0;
+        */
     }
 
     unsigned int padding = 16;
