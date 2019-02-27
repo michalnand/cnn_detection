@@ -33,7 +33,7 @@ class Detector
         unsigned int image_width, image_height;
         float confidence;
 
-        std::vector<float> cnn_output;
+        std::vector<float> cnn_input, cnn_output;
 
         unsigned int width_ratio, height_ratio;
         unsigned int output_width, output_height, output_depth;
@@ -46,10 +46,11 @@ class Detector
         virtual ~Detector();
 
         void process(std::vector<float> &image_v);
-        void process(cv::Mat &frame);
+        void process(cv::Mat &image);
 
         sDetectorResult &get_result();
         void inpaint_class_result(std::vector<float> &image_v, float alpha = 0.3);
+        void inpaint_class_result(cv::Mat &image, float alpha = 0.3); 
 
     private:
         void result_init();

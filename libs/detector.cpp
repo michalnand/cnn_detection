@@ -48,6 +48,7 @@ Detector::~Detector()
 
 void Detector::process(std::vector<float> &image_v)
 {
+    std::cout << "DETECTOR process std::vector<float>\n";
     Timer timer;
 
     timer.start();
@@ -91,9 +92,37 @@ void Detector::process(std::vector<float> &image_v)
     result.computing_time = timer.get_duration();
 }
 
-void Detector::process(cv::Mat &frame)
+void Detector::process(cv::Mat &image)
 {
-    //TODO : frame to std::vector<float> and use process(std::vector<float> &image_v)
+    std::cout << "DETECTOR process cv::Mat\n";
+    std::cout << image_width << " " << image_height << "\n";
+
+    unsigned int layer_size = image_width*image_height;
+    unsigned int input_idx = 0;
+
+    for (unsigned int y = 0; y < image_height; y++)
+        for (unsigned int x = 0; x < image_width; x++)
+        {
+
+            float r = image.at<cv::Vec3b>(y,x)[2]/256.0;
+            float g = image.at<cv::Vec3b>(y,x)[1]/256.0;
+            float b = image.at<cv::Vec3b>(y,x)[0]/256.0;
+
+
+            cnn_input[input_idx + 0*layer_size] = r;
+            cnn_input[input_idx + 1*layer_size] = g;
+            cnn_input[input_idx + 2*layer_size] = b;
+
+            /*
+            image.at<cv::Vec3b>(y,x)[2] = r*255;
+            image.at<cv::Vec3b>(y,x)[1] = g*255;
+            image.at<cv::Vec3b>(y,x)[0] = b*255;
+            */
+            input_idx++;
+        }
+
+    process(cnn_input);
+
 }
 
 
@@ -101,6 +130,9 @@ sDetectorResult& Detector::get_result()
 {
     return result;
 }
+
+
+
 
 
 void Detector::inpaint_class_result(std::vector<float> &image_v, float alpha)
@@ -125,11 +157,40 @@ void Detector::inpaint_class_result(std::vector<float> &image_v, float alpha)
     }
 }
 
+
+void Detector::inpaint_class_result(cv::Mat &image, float alpha)
+{
+    inpaint_class_result(cnn_input, alpha);
+
+    unsigned int layer_size = image_width*image_height;
+    unsigned int input_idx = 0;
+
+    for (unsigned int y = 0; y < image_height; y++)
+        for (unsigned int x = 0; x < image_width; x++)
+        {
+            float r = cnn_input[input_idx + 0*layer_size];
+            float g = cnn_input[input_idx + 1*layer_size];
+            float b = cnn_input[input_idx + 2*layer_size];
+
+            image.at<cv::Vec3b>(y,x)[2] = r*255;
+            image.at<cv::Vec3b>(y,x)[1] = g*255;
+            image.at<cv::Vec3b>(y,x)[0] = b*255;
+
+            input_idx++;
+        }
+}
+
 void Detector::result_init()
 {
     result.output_width     = output_width;
     result.output_height    = output_height;
     result.classes_count    = output_depth;
+
+    unsigned int input_size = image_width*image_height*3;
+    cnn_input.resize(input_size);
+    for (unsigned int i = 0; i < cnn_input.size(); i++)
+        cnn_input[i] = 0.0;
+
 
     unsigned int output_size = output_width*output_height*output_depth;
     cnn_output.resize(output_size);
