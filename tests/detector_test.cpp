@@ -53,7 +53,7 @@ int main()
 
 	Timer timer;
 
-	unsigned int loops = 10000000;
+	unsigned int loops = 10;
 
 	timer.start();
 
@@ -67,8 +67,9 @@ int main()
 	ImageSave image_output(image.width, image.height, false);
 	image_output.save("output.png", image.data);
 
+	std::cout << "network run time " << detector.get_result().computing_time << "[ms]\n";
 
-	std::cout << "run time per frame " << timer.get_duration()/loops << "[ms]\n";
+	std::cout << "total run time per frame " << timer.get_duration()/loops << "[ms]\n";
 
 	/*
 	{
