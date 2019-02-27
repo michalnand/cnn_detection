@@ -33,8 +33,9 @@ int main()
 
 
 	float confidence = 0.7;
-	Detector detector("networks/net_3/trained/cnn_config.json", real_width, real_height, confidence);
+	Detector detector("networks/net_1/trained/cnn_config.json", real_width, real_height, confidence);
 
+	float fps_filtered = 0.0;
 
 	cv::namedWindow("camera",1);
 	while (1)
@@ -42,7 +43,16 @@ int main()
 		cv::Mat frame;
 		cap >> frame;
 
+		timer.start();
 		detector.process(frame);
+		timer.stop();
+
+		float fps = 1.0/(0.001*timer.get_duration() + 0.000000001);
+
+		fps_filtered = 0.95*fps_filtered + 0.05*fps;
+
+		std::cout << "FPS = " << fps_filtered << "\n";
+
 		detector.inpaint_class_result(frame, 0.5);
 
 		cv::imshow("camera", frame);

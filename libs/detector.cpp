@@ -48,7 +48,6 @@ Detector::~Detector()
 
 void Detector::process(std::vector<float> &image_v)
 {
-    std::cout << "DETECTOR process std::vector<float>\n";
     Timer timer;
 
     timer.start();
@@ -94,9 +93,6 @@ void Detector::process(std::vector<float> &image_v)
 
 void Detector::process(cv::Mat &image)
 {
-    std::cout << "DETECTOR process cv::Mat\n";
-    std::cout << image_width << " " << image_height << "\n";
-
     unsigned int layer_size = image_width*image_height;
     unsigned int input_idx = 0;
 
@@ -113,11 +109,6 @@ void Detector::process(cv::Mat &image)
             cnn_input[input_idx + 1*layer_size] = g;
             cnn_input[input_idx + 2*layer_size] = b;
 
-            /*
-            image.at<cv::Vec3b>(y,x)[2] = r*255;
-            image.at<cv::Vec3b>(y,x)[1] = g*255;
-            image.at<cv::Vec3b>(y,x)[0] = b*255;
-            */
             input_idx++;
         }
 
