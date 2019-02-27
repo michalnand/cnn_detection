@@ -100,6 +100,28 @@ sDetectorResult& Detector::get_result()
     return result;
 }
 
+
+void Detector::inpaint_class_result(std::vector<float> &image_v, float alpha)
+{
+    unsigned int padding = 16;
+
+    for (unsigned int k = 0; k < 3; k++)
+    for (unsigned int j = padding; j < image_height - padding; j++)
+    for (unsigned int i = padding; i < image_width - padding; i++)
+    {
+        unsigned int idx = (k*image_height + j)*image_width + i;
+        unsigned int res_j = (j)/height_ratio;
+        unsigned int res_i = (i)/width_ratio;
+
+        unsigned int class_id = result.class_result[res_j][res_i];
+        if (class_id != 0)
+        {
+            float v = alpha*image_v[idx] + (1.0 - alpha)*class_color(class_id, output_depth-1)[k];
+            image_v[idx] = v;
+        }
+    }
+}
+
 void Detector::result_init()
 {
     result.output_width     = output_width;

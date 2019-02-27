@@ -46,6 +46,7 @@ class Detector
         void process(cv::Mat &frame);
 
         sDetectorResult &get_result();
+        void inpaint_class_result(std::vector<float> &image_v, float alpha = 0.3);
 
     private:
         void result_init();
