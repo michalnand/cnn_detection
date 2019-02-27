@@ -1,0 +1,134 @@
+#include <detector.h>
+#include <timer.h>
+
+
+Detector::Detector(std::string network_config_file_name, unsigned int image_width, unsigned int image_height, float confidence)
+{
+    JsonConfig json(network_config_file_name);
+
+    unsigned int last_layer = json.result["layers"].size() - 1;
+
+    this->image_width = image_width;
+    this->image_height = image_height;
+    this->confidence = confidence;
+
+    sGeometry input_geometry;
+    input_geometry.w = image_width;
+    input_geometry.h = image_height;
+    input_geometry.d = 3;
+
+    sGeometry output_geometry;
+
+    unsigned int output_kernel_width    = json.result["layers"][last_layer]["input_geometry"][0].asInt();
+    unsigned int output_kernel_height   = json.result["layers"][last_layer]["input_geometry"][1].asInt();
+    unsigned int output_kernel_depth    = json.result["layers"][last_layer]["output_geometry"][2].asInt();
+
+    width_ratio    = json.result["input_geometry"][0].asInt()/output_kernel_width;
+    height_ratio   = json.result["input_geometry"][1].asInt()/output_kernel_height;
+
+    output_geometry.w  = output_kernel_width;
+    output_geometry.h  = output_kernel_height;
+    output_geometry.d  = output_kernel_depth;
+
+    output_width    = input_geometry.w/width_ratio;
+    output_height   = input_geometry.h/height_ratio;
+    output_depth    = output_kernel_depth;
+
+    cnn = new CNN(json.result, input_geometry, output_geometry, true);
+
+    result_init();
+}
+
+Detector::~Detector()
+{
+    delete cnn;
+}
+
+void Detector::process(std::vector<float> &image_v)
+{
+    Timer timer;
+
+    timer.start();
+    cnn->forward(cnn_output, image_v);
+
+    unsigned int ptr;
+    ptr = 0;
+    for (unsigned int k = 0; k < output_depth; k++)
+    {
+        for (unsigned int j = 0; j < output_height; j++)
+        for (unsigned int i = 0; i < output_width; i++)
+        {
+            result.confidence_result[k][j][i] = cnn_output[ptr];
+            ptr++;
+        }
+    }
+
+
+    for (unsigned int j = 0; j < output_height; j++)
+    for (unsigned int i = 0; i < output_width; i++)
+    {
+        unsigned int max_k = 0;
+        for (unsigned int k = 0; k < output_depth; k++)
+        {
+            float conf_best = result.confidence_result[max_k][j][i];
+            float conf = result.confidence_result[k][j][i];
+            if (k != 0)
+            if (conf > conf_best)
+            if (conf > confidence)
+            {
+                conf_best = conf;
+                max_k = k;
+            }
+        }
+
+        result.class_result[j][i] = max_k;
+    }
+
+    timer.stop();
+
+    result.computing_time = timer.get_duration();
+}
+
+void Detector::process(cv::Mat &frame)
+{
+    //TODO : frame to std::vector<float> and use process(std::vector<float> &image_v)
+}
+
+
+sDetectorResult& Detector::get_result()
+{
+    return result;
+}
+
+void Detector::result_init()
+{
+    result.output_width     = output_width;
+    result.output_height    = output_height;
+    result.classes_count    = output_depth;
+
+    unsigned int output_size = output_width*output_height*output_depth;
+    cnn_output.resize(output_size);
+    for (unsigned int i = 0; i < cnn_output.size(); i++)
+        cnn_output[i] = 0.0;
+
+
+    result.class_result.resize(output_height);
+    for (unsigned int j = 0; j < output_height; j++)
+    {
+        result.class_result[j].resize(output_width);
+        for (unsigned int i = 0; i < output_width; i++)
+            result.class_result[j][i] = 0;
+    }
+
+    result.confidence_result.resize(output_depth);
+    for (unsigned int k = 0; k < output_depth; k++)
+    {
+        result.confidence_result[k].resize(output_height);
+        for (unsigned int j = 0; j < output_height; j++)
+        {
+            result.confidence_result[k][j].resize(output_width);
+            for (unsigned int i = 0; i < output_width; i++)
+                result.confidence_result[k][j][i] = 0.0;
+        }
+    }
+}
