@@ -1,7 +1,14 @@
 #include <iostream>
 
+#include <detector.h>
+
+
 #include <cnn_detector.h>
 #include <image_load.h>
+#include <image_save.h>
+
+
+#include <timer.h>
 
 struct sImagePadded
 {
@@ -40,6 +47,28 @@ sImagePadded load_image(std::string file_name)
 
 int main()
 {
+	float confidence = 0.7;
+	auto image = load_image("images/warehouse_02_code_24_40.png");
+	Detector detector("networks/net_1/trained/cnn_config.json", image.width, image.height, confidence);
+
+	Timer timer;
+
+	unsigned int loops = 10000000;
+
+	timer.start();
+
+	for (unsigned int i = 0; i < loops; i++)
+		detector.process(image.data);
+
+	timer.stop();
+
+	detector.inpaint_class_result(image.data);
+
+	ImageSave image_output(image.width, image.height, false);
+	image_output.save("output.png", image.data);
+
+
+	std::cout << "run time per frame " << timer.get_duration()/loops << "[ms]\n";
 
 	/*
 	{
@@ -96,7 +125,7 @@ int main()
 		}
 */
 
-
+/*
 		{
 			auto image = load_image("images/warehouse_00_code_16_40.png");
 			CNNDetector detector("networks/net_1/trained/cnn_config.json", image.width, image.height);
@@ -140,7 +169,7 @@ int main()
 			detector.process("result/warehouse_03_code_24_40.png", image.data);
 		}
 
-
+*/
 	std::cout << "program done\n";
 
  	return 0;

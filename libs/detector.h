@@ -38,6 +38,9 @@ class Detector
         unsigned int width_ratio, height_ratio;
         unsigned int output_width, output_height, output_depth;
 
+    private:
+        std::vector<std::vector<float>> color_palette;
+
     public:
         Detector(std::string network_config_file_name, unsigned int image_width, unsigned int image_height, float = 0.9);
         virtual ~Detector();
@@ -50,6 +53,9 @@ class Detector
 
     private:
         void result_init();
+
+        std::vector<std::vector<float>> generate_color_palette(unsigned int count);
+        std::vector<float>& get_class_color(unsigned int class_id);
 };
 
 

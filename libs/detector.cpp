@@ -1,6 +1,6 @@
 #include <detector.h>
 #include <timer.h>
-
+#include <iostream>
 
 Detector::Detector(std::string network_config_file_name, unsigned int image_width, unsigned int image_height, float confidence)
 {
@@ -37,6 +37,8 @@ Detector::Detector(std::string network_config_file_name, unsigned int image_widt
     cnn = new CNN(json.result, input_geometry, output_geometry, true);
 
     result_init();
+
+    color_palette = generate_color_palette(output_depth - 1);
 }
 
 Detector::~Detector()
@@ -114,9 +116,10 @@ void Detector::inpaint_class_result(std::vector<float> &image_v, float alpha)
         unsigned int res_i = (i)/width_ratio;
 
         unsigned int class_id = result.class_result[res_j][res_i];
+
         if (class_id != 0)
         {
-            float v = alpha*image_v[idx] + (1.0 - alpha)*class_color(class_id, output_depth-1)[k];
+            float v = alpha*image_v[idx] + (1.0 - alpha)*get_class_color(class_id-1)[k];
             image_v[idx] = v;
         }
     }
@@ -153,4 +156,26 @@ void Detector::result_init()
                 result.confidence_result[k][j][i] = 0.0;
         }
     }
+}
+
+std::vector<std::vector<float>> Detector::generate_color_palette(unsigned int count)
+{
+    std::vector<std::vector<float>> result(count);
+
+    for (unsigned int i = 0; i < count; i++)
+    {
+        float c = 2.0*3.141592654;
+        float phase = i*c/count;
+
+        result[i].push_back((sin(phase + c*0.0*1.0/3.0) + 1.0)/2.0);
+        result[i].push_back((sin(phase + c*1.0*1.0/3.0) + 1.0)/2.0);
+        result[i].push_back((sin(phase + c*2.0*1.0/3.0) + 1.0)/2.0);
+    }
+
+    return result;
+}
+
+std::vector<float>& Detector::get_class_color(unsigned int class_id)
+{
+    return color_palette[class_id];
 }

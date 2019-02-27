@@ -24,4 +24,3 @@ output_geometry [484 272 2]
 network flops operations 1484199552 FLOPS, 1.484200 GFLOPS
 init DONE
 
-network destructor done
