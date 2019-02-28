@@ -16,10 +16,15 @@ unsigned int padding(unsigned int value, unsigned int padding)
 
 int main()
 {
+	/*
 	unsigned int width  = padding(640, 16);
 	unsigned int height = padding(480, 16);
+	*/
 
-	cv::VideoCapture cap(0); // open the default camera
+	unsigned int width  = padding(1024, 16);
+	unsigned int height = padding(768, 16);
+
+	cv::VideoCapture cap(1); // open the default camera
 	if(!cap.isOpened())  // check if we succeeded
 		return -1;
 
@@ -38,6 +43,8 @@ int main()
 	float fps_filtered = 0.0;
 
 	cv::namedWindow("camera",1);
+
+	//cv::VideoWriter video_writer("output.avi",CV_FOURCC('M','J','P','G'),10, cv::Size(real_width,real_height));
 	while (1)
 	{
 		cv::Mat frame;
@@ -55,10 +62,13 @@ int main()
 
 		detector.inpaint_class_result(frame, 0.5);
 
+		//video_writer.write(frame);
 		cv::imshow("camera", frame);
 		if( cv::waitKey(10) == 27 )
 			break; // stop capturing by pressing ESC
 	}
+
+	//video_writer.release();
 
 	std::cout << "program done\n";
  	return 0;
