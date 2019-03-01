@@ -14,10 +14,16 @@ unsigned int padding(unsigned int value, unsigned int padding)
 	return result;
 }
 
+float round_to_two(float var)
+{
+    float value = (int)(var * 100 + .5);
+    return (float)value / 100;
+}
+
 int main()
 {
-	unsigned int width  = padding(640, 16);
-	unsigned int height = padding(480, 16);
+	unsigned int width  = padding(1024, 16);
+	unsigned int height = padding(768, 16);
 
 	cv::VideoCapture cap(0); // open the default camera
 	if(!cap.isOpened())  // check if we succeeded
@@ -54,6 +60,11 @@ int main()
 		std::cout << "FPS = " << fps_filtered << "\n";
 
 		detector.inpaint_class_result(frame, 0.5);
+
+		std::string str_fps_a = "resolution = [" + std::to_string(real_width) + " " + std::to_string(real_height) + "]";
+		std::string str_fps_b = "fps = " + std::to_string((int)fps_filtered);
+		cv::putText(frame, str_fps_a, cv::Point(30, 30), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(255, 255, 255), 2);
+		cv::putText(frame, str_fps_b, cv::Point(30, 60), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(255, 255, 255), 2);
 
 		cv::imshow("camera", frame);
 		if( cv::waitKey(10) == 27 )
