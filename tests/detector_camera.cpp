@@ -38,7 +38,7 @@ int main()
 
 
 	float confidence = 0.7;
-	Detector detector("networks/net_1/trained/cnn_config.json", real_width, real_height, confidence);
+	Detector detector("networks/net_7/trained/cnn_config.json", real_width, real_height, confidence);
 
 	float fps_filtered = 0.0;
 
