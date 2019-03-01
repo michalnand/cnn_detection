@@ -22,6 +22,11 @@ float round_to_two(float var)
 
 int main()
 {
+	/*
+	unsigned int width  = padding(640, 16);
+	unsigned int height = padding(480, 16);
+	*/
+
 	unsigned int width  = padding(1024, 16);
 	unsigned int height = padding(768, 16);
 
@@ -44,6 +49,9 @@ int main()
 	float fps_filtered = 0.0;
 
 	cv::namedWindow("camera",1);
+
+	cv::VideoWriter video_writer("/home/michal/Videos/cnn_aruco_test.avi",CV_FOURCC('M','J','P','G'),10, cv::Size(real_width,real_height));
+
 	while (1)
 	{
 		cv::Mat frame;
@@ -63,13 +71,18 @@ int main()
 
 		std::string str_fps_a = "resolution = [" + std::to_string(real_width) + " " + std::to_string(real_height) + "]";
 		std::string str_fps_b = "fps = " + std::to_string((int)fps_filtered);
-		cv::putText(frame, str_fps_a, cv::Point(30, 30), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(255, 255, 255), 2);
-		cv::putText(frame, str_fps_b, cv::Point(30, 60), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(255, 255, 255), 2);
+		cv::putText(frame, str_fps_a, cv::Point(30, 30), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0, 0, 0), 2);
+		cv::putText(frame, str_fps_b, cv::Point(30, 60), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0, 0, 0), 2);
+
+
+		video_writer.write(frame);
 
 		cv::imshow("camera", frame);
 		if( cv::waitKey(10) == 27 )
 			break; // stop capturing by pressing ESC
 	}
+
+	video_writer.release();
 
 	std::cout << "program done\n";
  	return 0;
