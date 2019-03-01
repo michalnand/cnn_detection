@@ -50,7 +50,7 @@ int main()
 
 	cv::namedWindow("camera",1);
 
-	cv::VideoWriter video_writer("/home/michal/Videos/cnn_aruco_test.avi",CV_FOURCC('M','J','P','G'),10, cv::Size(real_width,real_height));
+	//cv::VideoWriter video_writer("/home/michal/Videos/cnn_aruco_test.avi",CV_FOURCC('M','J','P','G'),10, cv::Size(real_width,real_height));
 
 	while (1)
 	{
@@ -75,14 +75,14 @@ int main()
 		cv::putText(frame, str_fps_b, cv::Point(30, 60), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0, 0, 0), 2);
 
 
-		video_writer.write(frame);
+		//video_writer.write(frame);
 
 		cv::imshow("camera", frame);
 		if( cv::waitKey(10) == 27 )
 			break; // stop capturing by pressing ESC
 	}
 
-	video_writer.release();
+	//video_writer.release();
 
 	std::cout << "program done\n";
  	return 0;
