@@ -27,10 +27,10 @@ int main()
 	unsigned int height = padding(480, 16);
 	*/
 
-	unsigned int width  = padding(1024, 16);
-	unsigned int height = padding(768, 16);
+	unsigned int width  = padding(1920, 16);
+	unsigned int height = padding(1080, 16);
 
-	cv::VideoCapture cap(0); // open the default camera
+	cv::VideoCapture cap(1); // open the default camera
 	if(!cap.isOpened())  // check if we succeeded
 		return -1;
 
@@ -44,7 +44,7 @@ int main()
 
 
 	float confidence = 0.7;
-	Detector detector("networks/net_1/trained/cnn_config.json", real_width, real_height, confidence);
+	Detector detector("networks/net_7/trained/cnn_config.json", real_width, real_height, confidence);
 
 	float fps_filtered = 0.0;
 
