@@ -30,7 +30,7 @@ int main()
 	unsigned int width  = padding(1920, 16);
 	unsigned int height = padding(1080, 16);
 
-	cv::VideoCapture cap(1); // open the default camera
+	cv::VideoCapture cap(0); // open the default camera
 	if(!cap.isOpened())  // check if we succeeded
 		return -1;
 
