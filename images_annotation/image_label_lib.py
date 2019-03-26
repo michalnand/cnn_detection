@@ -39,7 +39,7 @@ class ImageLabel(QLabel):
         for i in range(0, self.augmentation_count):
             x = x0 - self.output_size_x + self.rnd_int(-self.offset_noise, self.offset_noise)
             y = y0 - self.output_size_y + self.rnd_int(-self.offset_noise, self.offset_noise)
-            y+= self.output_size_y//2
+            #y+= self.output_size_y//2
 
             if x > 0 and y > 0 and x < self.width - 2*self.output_size_x and y < self.height - 2*self.output_size_y:
 
