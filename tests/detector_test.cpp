@@ -47,9 +47,10 @@ sImagePadded load_image(std::string file_name)
 
 int main()
 {
-	float confidence = 0.7;
-	auto image = load_image("images/warehouse_02_code_24_40.png");
-	Detector detector("networks/net_1/trained/cnn_config.json", image.width, image.height, confidence);
+	float confidence = 0.999;
+
+	auto image = load_image("images/path_03.jpg");
+	Detector detector("networks/path_net_0/trained/cnn_config.json", image.width, image.height, confidence);
 
 	Timer timer;
 
@@ -65,7 +66,7 @@ int main()
 	detector.inpaint_class_result(image.data);
 
 	ImageSave image_output(image.width, image.height, false);
-	image_output.save("output.png", image.data);
+	image_output.save("path_output_03.jpg", image.data);
 
 	std::cout << "network run time " << detector.get_result().computing_time << "[ms]\n";
 

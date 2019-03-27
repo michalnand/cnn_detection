@@ -236,6 +236,8 @@ void CNNDetector::put_pixel(std::vector<float> &image_v, unsigned int x, unsigne
 
 void CNNDetector::process(std::string output_file_name, std::vector<float> &image_v)
 {
+    std::cout << "CNN Detector process\n";
+    
     Timer timer;
     timer.start();
     nn->forward(nn_output, image_v);
@@ -269,7 +271,7 @@ void CNNDetector::process(std::string output_file_name, std::vector<float> &imag
             float conf_best = result.confidence_result[max_k][j][i];
             float conf = result.confidence_result[k][j][i];
             if (k != 0)
-            if (conf > 0.7)
+            if (conf > 0.98)
                 max_k = k;
         }
 

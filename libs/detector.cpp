@@ -76,7 +76,7 @@ void Detector::process(std::vector<float> &image_v)
             float conf = result.confidence_result[k][j][i];
             if (k != 0)
             if (conf > conf_best)
-            if (conf > confidence)
+            if (conf > confidence) 
             {
                 conf_best = conf;
                 max_k = k;
