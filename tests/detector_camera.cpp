@@ -30,7 +30,8 @@ int main()
 	unsigned int width  = padding(1920, 16);
 	unsigned int height = padding(1080, 16);
 
-	cv::VideoCapture cap(0); // open the default camera
+	//cv::VideoCapture cap(0); // open the default camera
+	cv::VideoCapture cap("/home/michal/Videos/path/01_small.mp4"); // open the default camera
 	if(!cap.isOpened())  // check if we succeeded
 		return -1;
 
@@ -44,7 +45,7 @@ int main()
 
 
 	float confidence = 0.7;
-	Detector detector("networks/net_7/trained/cnn_config.json", real_width, real_height, confidence);
+	Detector detector("networks/path_net_0/trained/cnn_config.json", real_width, real_height, confidence);
 
 	float fps_filtered = 0.0;
 
@@ -71,8 +72,8 @@ int main()
 
 		std::string str_fps_a = "resolution = [" + std::to_string(real_width) + " " + std::to_string(real_height) + "]";
 		std::string str_fps_b = "fps = " + std::to_string((int)fps_filtered);
-		cv::putText(frame, str_fps_a, cv::Point(30, 30), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0, 0, 0), 2);
-		cv::putText(frame, str_fps_b, cv::Point(30, 60), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0, 0, 0), 2);
+		cv::putText(frame, str_fps_a, cv::Point(30, 30), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(255, 0, 0), 2);
+		cv::putText(frame, str_fps_b, cv::Point(30, 60), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(255, 0, 0), 2);
 
 
 		//video_writer.write(frame);
