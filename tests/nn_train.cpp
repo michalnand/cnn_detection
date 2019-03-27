@@ -7,6 +7,30 @@ int main()
 {
 	srand(time(NULL));
 
+	DatasetImages dataset("dataset_road.json");
+
+	{
+		ClassificationExperiment experiment(dataset, "networks/path_net_0/");
+		experiment.run();
+	}
+
+	{
+		ClassificationExperiment experiment(dataset, "networks/path_net_1/");
+		experiment.run();
+	}
+
+	{
+		ClassificationExperiment experiment(dataset, "networks/path_net_2/");
+		experiment.run();
+	}
+
+	{
+		ClassificationExperiment experiment(dataset, "networks/path_net_3/");
+		experiment.run();
+	}
+
+
+	/*
 	DatasetImages dataset("dataset.json");
 
 	{
@@ -41,7 +65,8 @@ int main()
 		ClassificationExperiment experiment(dataset, "networks/net_7/");
 		experiment.run();
 	}
-	
+	*/
+
 
 
 	std::cout << "program done\n";

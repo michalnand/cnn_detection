@@ -13,7 +13,7 @@ class ImageLabel(QLabel):
 
         self.output_size_x = 64
         self.output_size_y = 64
-        self.augmentation_count = 16
+        self.augmentation_count = 10
         self.offset_noise = 5
         self.rotation_noise = 45
 
@@ -26,8 +26,8 @@ class ImageLabel(QLabel):
         scaled_height = 768
         input_image = QImage(file_name);
 
-        #self.input_image_scaled = input_image.scaledToWidth(scale)
-        #self.input_image_paint = input_image.scaledToWidth(scale)
+        #self.input_image_scaled = input_image.scaledToWidth(scaled_width)
+        #self.input_image_paint = input_image.scaledToWidth(scaled_width)
 
         self.input_image_scaled = input_image.scaled(scaled_width, scaled_height)
         self.input_image_paint = input_image.scaled(scaled_width, scaled_height)
@@ -38,6 +38,11 @@ class ImageLabel(QLabel):
         self.width = self.input_image_scaled.size().width()
         self.height = self.input_image_scaled.size().height()
 
+    def set_class_id(self, class_id):
+        self.class_id = class_id
+
+    def get_class_id(self):
+        return self.class_id
 
     def mouseReleaseEvent(self, QMouseEvent):
 
@@ -60,7 +65,13 @@ class ImageLabel(QLabel):
 
                 augmented = self.augmentation(x, y, tmp_size_x, tmp_size_y)
 
-                name = "result/" + str(self.name_idx) + "_" + str(i) + ".jpg"
+                class_folder = "background"
+                if self.get_class_id() == 0:
+                    class_folder = "background"
+                else:
+                    class_folder = "foreground"
+
+                name = "result/" + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".jpg"
                 print("saving to ", name)
                 augmented.save(name)
 
@@ -68,10 +79,14 @@ class ImageLabel(QLabel):
             for x in range(0, self.output_size_x//2):
                 r, g, b, a = QColor(self.input_image_scaled.pixel(x*2 ,y*2)).getRgb()
 
-                r = 255
-                g = 0
-                b = 0
-
+                if self.get_class_id() == 0:
+                    r = 0
+                    g = 0
+                    b = 255
+                else:
+                    r = 255
+                    g = 0
+                    b = 0
 
                 self.input_image_paint.setPixel(x*2 + x0 - self.output_size_x//2 , y*2 + y0 - self.output_size_y//4, QColor(r, g, b, a).rgb())
 
