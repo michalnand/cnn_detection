@@ -55,12 +55,23 @@ void Detector::process(std::vector<float> &image_v)
 
     unsigned int ptr;
     ptr = 0;
+
+    int y_shift = 2;
+    int x_shift = 2;
+
     for (unsigned int k = 0; k < output_depth; k++)
     {
         for (unsigned int j = 0; j < output_height; j++)
         for (unsigned int i = 0; i < output_width; i++)
         {
-            result.confidence_result[k][j][i] = cnn_output[ptr];
+            int y_ = j + y_shift;
+            int x_ = i + x_shift;
+
+            if (y_ >= 0 && x_ >= 0)
+            if (y_ < output_height && x_ < output_width)
+            {
+                result.confidence_result[k][y_][x_] = cnn_output[ptr];
+            }
             ptr++;
         }
     }
@@ -76,7 +87,7 @@ void Detector::process(std::vector<float> &image_v)
             float conf = result.confidence_result[k][j][i];
             if (k != 0)
             if (conf > conf_best)
-            if (conf > confidence) 
+            if (conf > confidence)
             {
                 conf_best = conf;
                 max_k = k;

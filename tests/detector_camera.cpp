@@ -9,8 +9,6 @@ unsigned int padding(unsigned int value, unsigned int padding)
 {
 	unsigned int result;
 	result = (value/padding)*padding;
-
-	std::cout << result << "\n";
 	return result;
 }
 
@@ -22,41 +20,56 @@ float round_to_two(float var)
 
 int main()
 {
-	/*
-	unsigned int width  = padding(640, 16);
-	unsigned int height = padding(480, 16);
-	*/
+	JsonConfig detector_json("detector_config.json");
 
-	unsigned int width  = padding(1920, 16);
-	unsigned int height = padding(1080, 16);
+	std::string input_stream = detector_json.result["input_stream"].asString();
+	unsigned int width = detector_json.result["width"].asInt();
+	unsigned int height = detector_json.result["height"].asInt();
 
-	//cv::VideoCapture cap(0); // open the default camera
-	cv::VideoCapture cap("/home/michal/Videos/path/01_small.mp4"); // open the default camera
-	if(!cap.isOpened())  // check if we succeeded
+	float confidence = detector_json.result["confidence"].asFloat();
+
+	std::string network = detector_json.result["network"].asString();
+
+
+	width  = padding(width, 16);
+	height = padding(height, 16);
+
+
+	cv::VideoCapture cap(input_stream);
+	if(!cap.isOpened())
+	{
+		std::cout << "error opening input stream " << input_stream << "\n";
 		return -1;
+	}
 
-	cap.set(CV_CAP_PROP_FRAME_WIDTH,width);
+	cap.set(CV_CAP_PROP_FRAME_WIDTH, width);
 	cap.set(CV_CAP_PROP_FRAME_HEIGHT,height);
 
 	unsigned int real_width = int(cap.get(CV_CAP_PROP_FRAME_WIDTH));
 	unsigned int real_height = int(cap.get(CV_CAP_PROP_FRAME_HEIGHT));
 
-	std::cout << real_width << " " << real_height << "\n";
+	std::cout << "input size : " << real_width << " " << real_height << "\n";
+	std::cout << "confidence : " << confidence << "\n";
 
 
-	float confidence = 0.7;
-	Detector detector("networks/path_net_0/trained/cnn_config.json", real_width, real_height, confidence);
+
+	Detector detector(network, real_width, real_height, confidence);
+
+
 
 	float fps_filtered = 0.0;
 
 	cv::namedWindow("camera",1);
 
-	//cv::VideoWriter video_writer("/home/michal/Videos/cnn_aruco_test.avi",CV_FOURCC('M','J','P','G'),10, cv::Size(real_width,real_height));
+	//cv::VideoWriter video_writer("/home/michal/Videos/cnn_path_test2.avi",CV_FOURCC('M','J','P','G'),25, cv::Size(real_width,real_height));
 
 	while (1)
 	{
 		cv::Mat frame;
 		cap >> frame;
+
+		if (frame.empty())
+			break;
 
 		timer.start();
 		detector.process(frame);
