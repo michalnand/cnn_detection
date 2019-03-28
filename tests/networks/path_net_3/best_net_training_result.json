@@ -1,0 +1,21 @@
+{
+	"class_success_rate" : 
+	[
+		97.901741027832031,
+		98.022811889648438
+	],
+	"confusion_matrix" : 
+	[
+		[
+			3826,
+			78
+		],
+		[
+			82,
+			3867
+		]
+	],
+	"succes_result" : 97.962562561035156,
+	"total_correct" : 7693,
+	"total_wrong" : 160
+}
