@@ -7,7 +7,7 @@ int main()
 {
 	srand(time(NULL));
 
-	DatasetImages dataset("dataset_road.json");
+	DatasetImages dataset("dataset_path.json");
 
 	{
 		ClassificationExperiment experiment(dataset, "networks/path_net_0/");

@@ -17,8 +17,8 @@ class ImageLabel(QLabel):
         self.offset_noise = 5
         self.rotation_noise = 45
 
-        self.color_noise_level = 0.05
-        self.white_noise_level = 0.05
+        self.color_noise_level = 0.1
+        self.white_noise_level = 0.1
 
     def load_image(self, file_name, scale = 1200):
 
@@ -71,7 +71,7 @@ class ImageLabel(QLabel):
                 else:
                     class_folder = "foreground"
 
-                name = "result/" + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".jpg"
+                name = "result/" + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".png"
                 print("saving to ", name)
                 augmented.save(name)
 
@@ -118,13 +118,36 @@ class ImageLabel(QLabel):
         g_offset = color_range*self.rnd(-self.color_noise_level, self.color_noise_level)
         b_offset = color_range*self.rnd(-self.color_noise_level, self.color_noise_level)
 
+        if random.random() < 0.5:
+            offset_noise = True
+        else:
+            offset_noise = False
+
+        if random.random() < 0.5:
+            white_noise = True
+        else:
+            white_noise = False
+
         for y in range(0, image.size().height()):
             for x in range(0, image.size().width()):
                 r, g, b, a = QColor(image.pixel(x ,y)).getRgb()
 
-                r+= r_offset + color_range*self.rnd(-self.white_noise_level, self.white_noise_level)
-                g+= g_offset + color_range*self.rnd(-self.white_noise_level, self.white_noise_level)
-                b+= b_offset + color_range*self.rnd(-self.white_noise_level, self.white_noise_level)
+                if offset_noise:
+                    r+= r_offset
+                    g+= g_offset
+                    b+= b_offset
+
+                if white_noise:
+                    r+= color_range*self.rnd(-self.white_noise_level, self.white_noise_level)
+                    g+= color_range*self.rnd(-self.white_noise_level, self.white_noise_level)
+                    b+= color_range*self.rnd(-self.white_noise_level, self.white_noise_level)
+
+                if r < 0:
+                    r = 0
+                if g < 0:
+                    g = 0
+                if b < 0:
+                    b = 0
 
                 if r > color_range:
                     r = color_range
@@ -133,12 +156,7 @@ class ImageLabel(QLabel):
                 if b > color_range:
                     b = color_range
 
-                if r < 0:
-                    r = 0
-                if g < 0:
-                    g = 0
-                if b < 0:
-                    b = 0
+
 
                 image.setPixel(x, y, QColor(r, g, b, a).rgb())
 
