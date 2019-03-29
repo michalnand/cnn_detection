@@ -5,5 +5,5 @@
 
     "confidence"    : 0.95,
 
-    "network"       : "networks/path_net_2/trained/cnn_config.json"
+    "network"       : "networks/path_net_0/trained/cnn_config.json"
 }

@@ -1,7 +1,6 @@
 #ifndef _DETECTOR_H_
 #define _DETECTOR_H_
 
-
 #include <vector>
 #include <string>
 #include <cnn.h>
@@ -30,6 +29,7 @@ class Detector
         sDetectorResult result;
 
         CNN *cnn;
+        
         unsigned int image_width, image_height;
         float confidence;
 
@@ -50,7 +50,7 @@ class Detector
 
         sDetectorResult &get_result();
         void inpaint_class_result(std::vector<float> &image_v, float alpha = 0.3);
-        void inpaint_class_result(cv::Mat &image, float alpha = 0.3); 
+        void inpaint_class_result(cv::Mat &image, float alpha = 0.3);
 
     private:
         void result_init();
