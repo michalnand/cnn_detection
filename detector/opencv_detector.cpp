@@ -128,6 +128,7 @@ int OpenCVDetector::process_frame()
     if (print_results_enabled)
     {
         std::cout << get_result().json_string << "\n\n";
+        std::cout << "FPS " << fps_filtered << "\n\n";
     }
 
     if( cv::waitKey(10) == 27 )

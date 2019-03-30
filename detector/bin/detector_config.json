@@ -3,12 +3,12 @@
     "width"         : 1920,
     "height"        : 1080,
 
-    "confidence"    : 0.93,
+    "confidence"    : 0.97,
 
-    "network"       : "networks/path_net_0/trained/cnn_config.json",
+    "network"       : "networks/path_net_3/trained/cnn_config.json",
 
-    "print_results_enabled"         : false,
-    "visualisation_enabled"         : true,
+    "print_results_enabled"         : true,
+    "visualisation_enabled"         : false,
 
     "saving_enabled"        : false,
     "output_file_name"      : "video.avi"
