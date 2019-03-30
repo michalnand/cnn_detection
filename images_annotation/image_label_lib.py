@@ -71,7 +71,8 @@ class ImageLabel(QLabel):
                 else:
                     class_folder = "foreground"
 
-                name = "result/" + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".png"
+                result_path = "/home/michal/dataset/path/"
+                name = result_path + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".png"
                 print("saving to ", name)
                 augmented.save(name)
 

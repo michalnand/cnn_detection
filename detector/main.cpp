@@ -3,7 +3,7 @@
 
 #include <opencv_detector.h>
 
-int main() 
+int main()
 {
 	OpenCVDetector opencv_detector("detector_config.json");
 
@@ -12,7 +12,7 @@ int main()
 
 	}
 
-	std::cout << "program don\n";
+	std::cout << "program done\n";
 
 	return 0;
 }
