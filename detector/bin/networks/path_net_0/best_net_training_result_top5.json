@@ -7,15 +7,15 @@
 	"confusion_matrix" : 
 	[
 		[
-			3913,
+			4411,
 			0
 		],
 		[
 			0,
-			3940
+			4518
 		]
 	],
 	"succes_result" : 100,
-	"total_correct" : 7853,
+	"total_correct" : 8929,
 	"total_wrong" : 0
 }

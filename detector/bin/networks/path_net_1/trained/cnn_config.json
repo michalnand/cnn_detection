@@ -3,9 +3,9 @@
 	{
 		"dropout" : 0.40000000596046448,
 		"init_weight_range" : 0,
-		"lambda1" : 1.2500000146076218e-08,
-		"lambda2" : 1.2500000146076218e-08,
-		"learning_rate" : 6.2500002968590707e-05,
+		"lambda1" : 2.5000000292152436e-08,
+		"lambda2" : 2.5000000292152436e-08,
+		"learning_rate" : 0.00012500000593718141,
 		"minibatch_size" : 32
 	},
 	"input_geometry" : 

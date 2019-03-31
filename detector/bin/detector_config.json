@@ -3,7 +3,7 @@
     "width"         : 1920,
     "height"        : 1080,
 
-    "confidence"    : 0.97,
+    "confidence"    : 0.99,
 
     "network"       : "networks/path_net_0/trained/cnn_config.json",
 

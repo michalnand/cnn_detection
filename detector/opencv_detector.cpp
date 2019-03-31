@@ -96,6 +96,7 @@ int OpenCVDetector::process_frame()
 {
     cv::Mat frame;
     *video_capture >> frame;
+    *video_capture >> frame;
 
     if (frame.empty())
         return -1;
@@ -108,7 +109,7 @@ int OpenCVDetector::process_frame()
 	fps_filtered = 0.95*fps_filtered + 0.05*fps;
 
     if (visualisation_enabled)
-    {
+    { 
     	detector->inpaint_class_result(frame, 0.5);
 
     	std::string str_fps_a = "resolution = [" + std::to_string(real_width) + " " + std::to_string(real_height) + "]";
