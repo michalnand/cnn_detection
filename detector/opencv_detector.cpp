@@ -20,9 +20,9 @@ OpenCVDetector::OpenCVDetector(std::string json_file_name)
     width  = padding(width, 16);
     height = padding(height, 16);
 
-    video_capture = nullptr;
-    detector = nullptr;
-    video_writer = nullptr;
+    video_capture   = nullptr;
+    detector        = nullptr;
+    video_writer    = nullptr;
 
     video_capture = new cv::VideoCapture(input_stream);
 
@@ -31,7 +31,7 @@ OpenCVDetector::OpenCVDetector(std::string json_file_name)
         video_capture->set(CV_CAP_PROP_FRAME_WIDTH, width);
         video_capture->set(CV_CAP_PROP_FRAME_HEIGHT,height);
 
-        real_width = int(video_capture->get(CV_CAP_PROP_FRAME_WIDTH));
+        real_width  = int(video_capture->get(CV_CAP_PROP_FRAME_WIDTH));
         real_height = int(video_capture->get(CV_CAP_PROP_FRAME_HEIGHT));
 
         std::cout << "input size : " << real_width << " " << real_height << "\n";
@@ -109,7 +109,7 @@ int OpenCVDetector::process_frame()
 	fps_filtered = 0.95*fps_filtered + 0.05*fps;
 
     if (visualisation_enabled)
-    { 
+    {
     	detector->inpaint_class_result(frame, 0.5);
 
     	std::string str_fps_a = "resolution = [" + std::to_string(real_width) + " " + std::to_string(real_height) + "]";

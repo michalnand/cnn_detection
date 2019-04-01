@@ -129,6 +129,7 @@ void Detector::process(cv::Mat &image)
     unsigned int layer_size = image_width*image_height;
     unsigned int input_idx = 0;
 
+    /*
     for (unsigned int y = 0; y < image_height; y++)
         for (unsigned int x = 0; x < image_width; x++)
         {
@@ -144,6 +145,25 @@ void Detector::process(cv::Mat &image)
 
             input_idx++;
         }
+    */
+ 
+    for (unsigned int y = 0; y < image_height; y++)
+    {
+        cv::Vec3b* row = image.ptr<cv::Vec3b>(y);
+
+        for (unsigned int x = 0; x < image_width; x++)
+        {
+            float r = row[x][2]/256.0;
+            float g = row[x][1]/256.0;
+            float b = row[x][0]/256.0;
+
+            cnn_input[input_idx + 0*layer_size] = r;
+            cnn_input[input_idx + 1*layer_size] = g;
+            cnn_input[input_idx + 2*layer_size] = b;
+
+            input_idx++;
+        }
+    }
 
     process(cnn_input);
 }
