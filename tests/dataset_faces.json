@@ -3,7 +3,7 @@
     "width"         :   64,
     "height"        :   64,
 
-    "max items per folder"  : 35000,
+    "max items per folder"  : 20000,
     "classes count"         : 2,
 
     "testing ratio" : 0.1,
@@ -12,7 +12,11 @@
         [
             {
                 "class" : 0,
-                "path"  :  "/home/michal/dataset/faces/background/"
+                "path"  :  "/home/michal/dataset/faces/background_0/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/faces/background_1/"
             },
             {
                 "class" : 1,

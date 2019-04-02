@@ -22,7 +22,7 @@ class ImageLabel(QLabel):
 
     def load_image(self, file_name, scale = 1200):
 
-        scaled_width = 1024
+        scaled_width  = 1024
         scaled_height = 768
         input_image = QImage(file_name);
 
@@ -71,7 +71,7 @@ class ImageLabel(QLabel):
                 else:
                     class_folder = "foreground"
 
-                result_path = "/home/michal/dataset/path/"
+                result_path = "/home/michal/dataset/faces/"
                 name = result_path + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".png"
                 print("saving to ", name)
                 augmented.save(name)
