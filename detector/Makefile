@@ -5,7 +5,9 @@ ELF = bin/detector.elf
 INC+= -I.
 INC+= -I$(LIBS_RYSY_PATH)/libs_common
 INC+= -I$(LIBS_RYSY_PATH)/libs_cnn_deployment
+INC+= -I../libs_detector/
 
+LIBS+= ../libs_detector/libs_detector.a
 LIBS+= $(LIBS_RYSY_PATH)/libs_cnn_deployment/libs_cnn_deployment.a
 LIBS+= $(LIBS_RYSY_PATH)/libs_common/libs_common.a
 

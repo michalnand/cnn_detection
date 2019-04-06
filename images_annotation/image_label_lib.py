@@ -28,8 +28,9 @@ class ImageLabel(QLabel):
         scaled_width  = 1024
         scaled_height = 768
 
-        scaled_width  = 512
-        scaled_height = 512
+        scaled_width  = 640
+        scaled_height = 640
+
         input_image = QImage(file_name);
 
         #self.input_image_scaled = input_image.scaledToWidth(scaled_width)
