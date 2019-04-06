@@ -20,10 +20,16 @@ class ImageLabel(QLabel):
         self.color_noise_level = 0.1
         self.white_noise_level = 0.1
 
+        self.color_noise_level = 0.02
+        self.white_noise_level = 0.02
+
     def load_image(self, file_name, scale = 1200):
 
         scaled_width  = 1024
         scaled_height = 768
+
+        scaled_width  = 512
+        scaled_height = 512
         input_image = QImage(file_name);
 
         #self.input_image_scaled = input_image.scaledToWidth(scaled_width)
@@ -54,7 +60,7 @@ class ImageLabel(QLabel):
         tmp_size_x = self.output_size_x*2
         tmp_size_y = self.output_size_y*2
 
-        y0+= tmp_size_y//2
+        #y0+= tmp_size_y//2
 
 
         for i in range(0, self.augmentation_count):
@@ -71,7 +77,7 @@ class ImageLabel(QLabel):
                 else:
                     class_folder = "foreground"
 
-                result_path = "/home/michal/dataset/faces/"
+                result_path = "/home/michal/dataset/mars/"
                 name = result_path + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".png"
                 print("saving to ", name)
                 augmented.save(name)

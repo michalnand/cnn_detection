@@ -32,13 +32,13 @@ int main()
 	*/
 
 
-
+	/*
 	DatasetImages dataset("dataset_faces.json");
 
 	{
 		ClassificationExperiment experiment(dataset, "networks/faces_net_0/");
 		experiment.run();
-	} 
+	}
 
 	{
 		ClassificationExperiment experiment(dataset, "networks/faces_net_1/");
@@ -54,8 +54,15 @@ int main()
 		ClassificationExperiment experiment(dataset, "networks/faces_net_3/");
 		experiment.run();
 	}
+	*/
 
 
+	DatasetImages dataset("dataset_mars.json");
+
+	{
+		ClassificationExperiment experiment(dataset, "networks/mars_net_0/");
+		experiment.run();
+	}
 
 	std::cout << "program done\n";
  	return 0;
