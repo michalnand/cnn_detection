@@ -20,8 +20,8 @@ class ImageLabel(QLabel):
         self.color_noise_level = 0.1
         self.white_noise_level = 0.1
 
-        self.color_noise_level = 0.02
-        self.white_noise_level = 0.02
+        #self.color_noise_level = 0.02
+        #self.white_noise_level = 0.02
 
     def load_image(self, file_name, scale = 1200):
 
@@ -78,7 +78,7 @@ class ImageLabel(QLabel):
                 else:
                     class_folder = "foreground"
 
-                result_path = "/home/michal/dataset/mars/"
+                result_path = "/home/michal/dataset/test/"
                 name = result_path + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".png"
                 print("saving to ", name)
                 augmented.save(name)

@@ -7,12 +7,12 @@
 	"confusion_matrix" : 
 	[
 		[
-			1185,
+			1197,
 			0
 		],
 		[
 			0,
-			1225
+			1213
 		]
 	],
 	"succes_result" : 100,
