@@ -11,9 +11,9 @@ class ImageLabel(QLabel):
 
         self.name_idx = 0
 
-        self.output_size_x = 64
-        self.output_size_y = 64
-        self.augmentation_count = 10
+        self.output_size_x = 96
+        self.output_size_y = 96
+        self.augmentation_count = 16
         self.offset_noise = 5
         self.rotation_noise = 45
 
@@ -26,18 +26,18 @@ class ImageLabel(QLabel):
     def load_image(self, file_name, scale = 1200):
 
         scaled_width  = 1024
-        scaled_height = 768
+        scaled_height = 1024
 
-        scaled_width  = 640
-        scaled_height = 640
+        #scaled_width  = 640
+        #scaled_height = 480
 
         input_image = QImage(file_name);
 
-        #self.input_image_scaled = input_image.scaledToWidth(scaled_width)
-        #self.input_image_paint = input_image.scaledToWidth(scaled_width)
+        self.input_image_scaled = input_image.scaledToWidth(scaled_width)
+        self.input_image_paint = input_image.scaledToWidth(scaled_width)
 
-        self.input_image_scaled = input_image.scaled(scaled_width, scaled_height)
-        self.input_image_paint = input_image.scaled(scaled_width, scaled_height)
+        #self.input_image_scaled = input_image.scaled(scaled_width, scaled_height)
+        #self.input_image_paint = input_image.scaled(scaled_width, scaled_height)
 
         pixmap = QPixmap(self.input_image_paint)
         self.setPixmap(pixmap)
@@ -61,7 +61,7 @@ class ImageLabel(QLabel):
         tmp_size_x = self.output_size_x*2
         tmp_size_y = self.output_size_y*2
 
-        #y0+= tmp_size_y//2
+        #y0+= tmp_size_y
 
 
         for i in range(0, self.augmentation_count):
@@ -78,7 +78,7 @@ class ImageLabel(QLabel):
                 else:
                     class_folder = "foreground"
 
-                result_path = "/home/michal/dataset/test/"
+                result_path = "/home/michal/cells/"
                 name = result_path + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".png"
                 print("saving to ", name)
                 augmented.save(name)

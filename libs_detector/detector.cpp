@@ -71,6 +71,7 @@ void Detector::process(std::vector<float> &image_v)
     for (unsigned int i = 0; i < output_width - x_shift; i++)
     {
         unsigned int max_k = 0;
+
         for (unsigned int k = 0; k < output_depth; k++)
         {
             float conf_best = cnn_output_get(i, j, max_k);
@@ -83,6 +84,7 @@ void Detector::process(std::vector<float> &image_v)
                 conf_best = conf;
                 max_k = k;
             }
+
         }
 
         result.class_result[j + y_shift][i + x_shift] = max_k;
@@ -146,7 +148,7 @@ void Detector::process(cv::Mat &image)
             input_idx++;
         }
     */
- 
+
     for (unsigned int y = 0; y < image_height; y++)
     {
         cv::Vec3b* row = image.ptr<cv::Vec3b>(y);

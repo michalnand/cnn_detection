@@ -1,0 +1,23 @@
+{
+    "grayscale"     :   false,
+    "width"         :   64,
+    "height"        :   64,
+
+    "max items per folder"  : 20000,
+    "classes count"         : 2,
+
+    "testing ratio" : 0.1,
+
+    "dataset" :
+        [
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/trails/background/"
+            },
+            {
+                "class" : 1,
+                "path"  :   "/home/michal/trails/foreground/"
+            }
+        ]
+
+}
