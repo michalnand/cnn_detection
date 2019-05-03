@@ -52,6 +52,20 @@ float Detector::cnn_output_get(unsigned int x, unsigned y, unsigned ch)
     return cnn_output[idx];
 }
 
+void Detector::compute_softmax()
+{
+    for (unsigned int j = 0; j < output_height; j++)
+        for (unsigned int i = 0; i < output_width; i++)
+        {
+            float sum = 0.00000001;
+            for (unsigned int k = 0; k < output_depth; k++)
+                sum+= exp(cnn_output_get(i, j, k));
+
+            for (unsigned int k = 0; k < output_depth; k++)
+                softmax_output[k][j][i] = exp(cnn_output_get(i, j, k))/sum;
+        }
+}
+
 void Detector::process(std::vector<float> &image_v)
 {
     Timer timer;
@@ -59,6 +73,8 @@ void Detector::process(std::vector<float> &image_v)
     timer.start();
 
     cnn->forward(cnn_output, image_v);
+
+    compute_softmax();
 
     unsigned int ptr;
     ptr = 0;
@@ -74,11 +90,11 @@ void Detector::process(std::vector<float> &image_v)
 
         for (unsigned int k = 0; k < output_depth; k++)
         {
-            float conf_best = cnn_output_get(i, j, max_k);
-            float conf = cnn_output_get(i, j, k);
+            float conf_best = softmax_output[max_k][j][i];
+            float conf = softmax_output[k][j][i];
 
             if (k != 0)
-            if (conf > conf_best)
+            //if (conf > conf_best) 
             if (conf > confidence)
             {
                 conf_best = conf;
@@ -87,6 +103,7 @@ void Detector::process(std::vector<float> &image_v)
 
         }
 
+        //std::cout << "["  << softmax_output[0][j][i] << ", " << softmax_output[1][j][i] << "] ";
         result.class_result[j + y_shift][i + x_shift] = max_k;
     }
 
@@ -241,6 +258,18 @@ void Detector::result_init()
     cnn_output.resize(output_size);
     for (unsigned int i = 0; i < cnn_output.size(); i++)
         cnn_output[i] = 0.0;
+
+    softmax_output.resize(output_depth);
+    for (unsigned int k = 0; k < output_depth; k++)
+    {
+        softmax_output[k].resize(output_height);
+        for (unsigned int j = 0; j < output_height; j++)
+        {
+            softmax_output[k][j].resize(output_width);
+            for (unsigned int i = 0; i < output_width; i++)
+                softmax_output[k][j][i] = 0.0;
+        }
+    }
 
 
     result.class_result.resize(output_height);

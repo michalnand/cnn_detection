@@ -1,9 +1,9 @@
 {
     "grayscale"     :   false,
-    "width"         :   96,
-    "height"        :   96,
+    "width"         :   30,
+    "height"        :   30,
 
-    "max items per folder"  : 20000,
+    "max items per folder"  : 30000,
     "classes count"         : 2,
 
     "testing ratio" : 0.1,

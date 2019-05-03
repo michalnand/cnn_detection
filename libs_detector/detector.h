@@ -37,6 +37,7 @@ class Detector
         float confidence;
 
         std::vector<float> cnn_input, cnn_output;
+        std::vector<std::vector<std::vector<float>>> softmax_output;
 
         unsigned int width_ratio, height_ratio;
         unsigned int output_width, output_height, output_depth;
@@ -62,6 +63,7 @@ class Detector
         std::vector<float>& get_class_color(unsigned int class_id);
 
         float cnn_output_get(unsigned int x, unsigned y, unsigned ch);
+        void compute_softmax();
 
 };
 

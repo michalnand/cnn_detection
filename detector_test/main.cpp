@@ -42,6 +42,7 @@ sImagePadded load_image(std::string file_name)
 		result.data[output_idx] = image.get()[input_idx];
 	}
 
+/*
 	float max = result.data[0];
 	float min = result.data[0];
 
@@ -68,7 +69,7 @@ sImagePadded load_image(std::string file_name)
 
 	for (unsigned int i = 0; i < result.data.size(); i++)
 		result.data[i] = result.data[i]*k + q;
-
+*/
 
 	return result;
 }
@@ -76,7 +77,7 @@ sImagePadded load_image(std::string file_name)
 
 void process_image(std::string output_file_name, std::string input_file_name, std::string network_file_name)
 {
-	float confidence = 0.0;
+	float confidence = 0.2;
 
 	auto image = load_image(input_file_name);
 	Detector detector(network_file_name, image.width, image.height, confidence);

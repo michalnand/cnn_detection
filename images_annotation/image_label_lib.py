@@ -11,14 +11,14 @@ class ImageLabel(QLabel):
 
         self.name_idx = 0
 
-        self.output_size_x = 96
-        self.output_size_y = 96
-        self.augmentation_count = 16
+        self.output_size_x = 30
+        self.output_size_y = 30
+        self.augmentation_count = 10
         self.offset_noise = 5
         self.rotation_noise = 45
 
-        self.color_noise_level = 0.1
-        self.white_noise_level = 0.1
+        self.color_noise_level = 0.03
+        self.white_noise_level = 0.03
 
         #self.color_noise_level = 0.02
         #self.white_noise_level = 0.02
@@ -61,7 +61,7 @@ class ImageLabel(QLabel):
         tmp_size_x = self.output_size_x*2
         tmp_size_y = self.output_size_y*2
 
-        #y0+= tmp_size_y
+        y0-= tmp_size_y//16
 
 
         for i in range(0, self.augmentation_count):

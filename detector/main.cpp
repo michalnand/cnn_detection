@@ -9,7 +9,7 @@ int main()
 
 	while (opencv_detector.process_frame() == 0)
 	{
-
+ 
 	}
 	std::cout << "program done\n";
 

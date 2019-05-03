@@ -1,11 +1,11 @@
 {
-    "input_stream"  : "/home/michal/Videos/path/03_small.mp4",
+    "input_stream"  : "/home/michal/Videos/path/02_small.mp4",
     "width"         : 1920,
     "height"        : 1080,
 
-    "confidence"    : 0.99,
+    "confidence"    : 0.8,
 
-    "network"       : "networks/trail_net_1/trained/cnn_config.json",
+    "network"       : "networks/trail_net_0/trained/cnn_config.json",
 
     "print_results_enabled"         : true,
     "visualisation_enabled"         : true,
