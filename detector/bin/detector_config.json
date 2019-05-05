@@ -3,9 +3,9 @@
     "width"         : 1920,
     "height"        : 1080,
 
-    "confidence"    : 0.8,
+    "confidence"    : 0.85,
 
-    "network"       : "networks/trail_net_0/trained/cnn_config.json",
+    "network"       : "networks/path_net_0/trained/cnn_config.json",
 
     "print_results_enabled"         : true,
     "visualisation_enabled"         : true,

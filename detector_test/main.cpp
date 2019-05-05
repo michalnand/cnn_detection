@@ -11,7 +11,7 @@
 
 
 struct sImagePadded
-{
+{  
 	unsigned int width;
 	unsigned int height;
 	std::vector<float> data;

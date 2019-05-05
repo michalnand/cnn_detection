@@ -16,7 +16,7 @@ OpenCVDetector::OpenCVDetector(std::string json_file_name)
     print_results_enabled = detector_json.result["print_results_enabled"].asBool();
     visualisation_enabled = detector_json.result["visualisation_enabled"].asBool();
     saving_enabled = detector_json.result["saving_enabled"].asBool();
-
+ 
     width  = padding(width, 16);
     height = padding(height, 16);
 

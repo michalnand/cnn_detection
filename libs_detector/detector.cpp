@@ -39,6 +39,8 @@ Detector::Detector(std::string network_config_file_name, unsigned int image_widt
     result_init();
 
     color_palette = generate_color_palette(output_depth - 1);
+
+    std::cout << "DETECTOR INIT DONE\n";
 }
 
 Detector::~Detector()
@@ -58,11 +60,23 @@ void Detector::compute_softmax()
         for (unsigned int i = 0; i < output_width; i++)
         {
             float sum = 0.00000001;
+
+            float max = cnn_output_get(i, j, 0);
             for (unsigned int k = 0; k < output_depth; k++)
-                sum+= exp(cnn_output_get(i, j, k));
+            {
+                float tmp = cnn_output_get(i, j, k);
+                if (tmp > max)
+                    max = tmp;
+            }
 
             for (unsigned int k = 0; k < output_depth; k++)
-                softmax_output[k][j][i] = exp(cnn_output_get(i, j, k))/sum;
+            {
+                float tmp = cnn_output_get(i, j, k);
+                sum+= exp(tmp - max);
+            }
+
+            for (unsigned int k = 0; k < output_depth; k++)
+                softmax_output[k][j][i] = exp(cnn_output_get(i, j, k) - max)/sum;
         }
 }
 
@@ -94,7 +108,7 @@ void Detector::process(std::vector<float> &image_v)
             float conf = softmax_output[k][j][i];
 
             if (k != 0)
-            //if (conf > conf_best) 
+            if (conf > conf_best)
             if (conf > confidence)
             {
                 conf_best = conf;
@@ -267,7 +281,11 @@ void Detector::result_init()
         {
             softmax_output[k][j].resize(output_width);
             for (unsigned int i = 0; i < output_width; i++)
+            {
                 softmax_output[k][j][i] = 0.0;
+                if (k == 0)
+                    softmax_output[k][j][i] = 1.0;
+            }
         }
     }
 
