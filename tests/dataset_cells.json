@@ -12,19 +12,19 @@
         [
             {
                 "class" : 0,
-                "path"  :  "/home/michal/neurons/background_0/"
+                "path"  :  "/home/michal/dataset/neurons/background_0/"
             },
             {
                 "class" : 1,
-                "path"  :   "/home/michal/neurons/foreground_0/"
+                "path"  :   "/home/michal/dataset/neurons/foreground_0/"
             },
             {
                 "class" : 0,
-                "path"  :  "/home/michal/neurons/background_1/"
+                "path"  :  "/home/michal/dataset/neurons/background_1/"
             },
             {
                 "class" : 1,
-                "path"  :   "/home/michal/neurons/foreground_1/"
+                "path"  :   "/home/michal/dataset/neurons/foreground_1/"
             }
         ]
 
