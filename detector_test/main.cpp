@@ -11,7 +11,7 @@
 
 
 struct sImagePadded
-{  
+{
 	unsigned int width;
 	unsigned int height;
 	std::vector<float> data;
@@ -19,11 +19,11 @@ struct sImagePadded
 
 sImagePadded load_image(std::string file_name)
 {
-	unsigned int padding = 16;
+	unsigned int padding = 64;
 	ImageLoad image(file_name, false, true);
 
-	unsigned width 	= ((image.width()+padding)/padding)*padding;
-	unsigned height = ((image.height()+padding)/padding)*padding;
+	unsigned width 	= ((image.width() + padding)/padding)*padding;
+	unsigned height = ((image.height() + padding)/padding)*padding;
 
 	sImagePadded result;
 	result.width = width;
@@ -38,7 +38,7 @@ sImagePadded load_image(std::string file_name)
 	for (unsigned int i = 0; i < image.width(); i++)
 	{
 		unsigned int input_idx = (k*image.height() + j)*image.width() + i;
-		unsigned int output_idx = (k*height + j)*width + i;
+		unsigned int output_idx = (k*height + j + padding/2)*width + i + padding/2;
 		result.data[output_idx] = image.get()[input_idx];
 	}
 
@@ -77,7 +77,7 @@ sImagePadded load_image(std::string file_name)
 
 void process_image(std::string output_file_name, std::string input_file_name, std::string network_file_name)
 {
-	float confidence = 0.2;
+	float confidence = 0.8;
 
 	auto image = load_image(input_file_name);
 	Detector detector(network_file_name, image.width, image.height, confidence);
@@ -100,43 +100,21 @@ void process_image(std::string output_file_name, std::string input_file_name, st
 
 int main()
 {
-	/*
-	std::string file_name_prefix =
-	float confidence = 0.99;
+	std::string result_path = "/home/michal/programming/cnn_detection/detector_test/bin/neurons_result/";
 
-	auto image = load_image("/home/michal/cells/source/3.png");
-	Detector detector("networks/cells_net_0/trained/cnn_config.json", image.width, image.height, confidence);
+	std::string source_path = "/home/michal/programming/cnn_detection/detector_test/bin/neurons_source/";
 
-	Timer timer;
-
-	unsigned int loops = 10;
-
-	timer.start();
-
-	for (unsigned int i = 0; i < loops; i++)
-		detector.process(image.data);
-
-	timer.stop();
-
-	detector.inpaint_class_result(image.data);
-
-	ImageSave image_output(image.width, image.height, false);
-	image_output.save("/home/michal/cells/source/3_result.png", image.data);
-
-	std::cout << "network run time " << detector.get_result().computing_time << "[ms]\n";
-
-	std::cout << "total run time per frame " << timer.get_duration()/loops << "[ms]\n";
-	*/
-
-	process_image("/home/michal/cells/source/0_result.png", "/home/michal/cells/source/0.png", "networks/cells_net_0/trained/cnn_config.json");
-	process_image("/home/michal/cells/source/1_result.png", "/home/michal/cells/source/1.png", "networks/cells_net_0/trained/cnn_config.json");
-	process_image("/home/michal/cells/source/2_result.png", "/home/michal/cells/source/2.png", "networks/cells_net_0/trained/cnn_config.json");
-	process_image("/home/michal/cells/source/3_result.png", "/home/michal/cells/source/3.png", "networks/cells_net_0/trained/cnn_config.json");
-	process_image("/home/michal/cells/source/4_result.png", "/home/michal/cells/source/4.png", "networks/cells_net_0/trained/cnn_config.json");
-	process_image("/home/michal/cells/source/5_result.png", "/home/michal/cells/source/5.png", "networks/cells_net_0/trained/cnn_config.json");
-	process_image("/home/michal/cells/source/6_result.png", "/home/michal/cells/source/6.png", "networks/cells_net_0/trained/cnn_config.json");
-	process_image("/home/michal/cells/source/7_result.png", "/home/michal/cells/source/7.png", "networks/cells_net_0/trained/cnn_config.json");
-	process_image("/home/michal/cells/source/8_result.png", "/home/michal/cells/source/8.png", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0057.jpg", source_path + "image0057.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0058.jpg", source_path + "image0058.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0059.jpg", source_path + "image0059.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0060.jpg", source_path + "image0060.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0061.jpg", source_path + "image0061.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0062.jpg", source_path + "image0062.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0063.jpg", source_path + "image0063.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0064.jpg", source_path + "image0064.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0065.jpg", source_path + "image0065.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0066.jpg", source_path + "image0066.tif", "networks/cells_net_0/trained/cnn_config.json");
+	process_image(result_path + "image0067.jpg", source_path + "image0067.tif", "networks/cells_net_0/trained/cnn_config.json");
 
 	std::cout << "program done\n";
 

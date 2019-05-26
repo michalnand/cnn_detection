@@ -6,7 +6,7 @@
     "max items per folder"  : 20000,
     "classes count"         : 2,
 
-    "testing ratio" : 0.1,
+    "testing ratio" : 0.0,
 
     "dataset" :
         [
@@ -25,6 +25,34 @@
             {
                 "class" : 1,
                 "path"  :   "/home/michal/dataset/neurons/foreground_1/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/neurons/background_2/"
+            },
+            {
+                "class" : 1,
+                "path"  :   "/home/michal/dataset/neurons/foreground_2/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/neurons/background_3/"
+            },
+            {
+                "class" : 1,
+                "path"  :   "/home/michal/dataset/neurons/foreground_3/"
+            }
+        ],
+
+    "dataset testing" :
+        [
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/dataset/neurons/testing_background/"
+            },
+            {
+                "class" : 1,
+                "path"  :   "/home/michal/dataset/neurons/testing_foreground/"
             }
         ]
 
