@@ -1,9 +1,9 @@
 {
     "grayscale"     :   false,
-    "width"         :   30,
-    "height"        :   30,
+    "width"         :   64,
+    "height"        :   64,
 
-    "max items per folder"  : 30000,
+    "max items per folder"  : 20000,
     "classes count"         : 2,
 
     "testing ratio" : 0.1,
@@ -12,11 +12,19 @@
         [
             {
                 "class" : 0,
-                "path"  :  "/home/michal/cells/background/"
+                "path"  :  "/home/michal/neurons/background_0/"
             },
             {
                 "class" : 1,
-                "path"  :   "/home/michal/cells/foreground/"
+                "path"  :   "/home/michal/neurons/foreground_0/"
+            },
+            {
+                "class" : 0,
+                "path"  :  "/home/michal/neurons/background_1/"
+            },
+            {
+                "class" : 1,
+                "path"  :   "/home/michal/neurons/foreground_1/"
             }
         ]
 

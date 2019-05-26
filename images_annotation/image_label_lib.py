@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
 from PyQt5.QtGui import QIcon, QPixmap, QPainter, QPen, QImage, QTransform, QColor
 
-from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtCore import Qt, QTimer, QRect
 
 import random
 
@@ -11,33 +11,33 @@ class ImageLabel(QLabel):
 
         self.name_idx = 0
 
-        self.output_size_x = 30
-        self.output_size_y = 30
+        self.output_size_x = 64
+        self.output_size_y = 64
         self.augmentation_count = 10
         self.offset_noise = 5
         self.rotation_noise = 45
 
-        self.color_noise_level = 0.03
-        self.white_noise_level = 0.03
+        self.color_noise_level = 0.05
+        self.white_noise_level = 0.05
 
         #self.color_noise_level = 0.02
         #self.white_noise_level = 0.02
 
     def load_image(self, file_name, scale = 1200):
 
-        scaled_width  = 1024
-        scaled_height = 1024
 
         #scaled_width  = 640
         #scaled_height = 480
 
         input_image = QImage(file_name);
 
-        self.input_image_scaled = input_image.scaledToWidth(scaled_width)
-        self.input_image_paint = input_image.scaledToWidth(scaled_width)
+        print("SIZE = ", input_image.size().width(), input_image.size().height())
 
-        #self.input_image_scaled = input_image.scaled(scaled_width, scaled_height)
-        #self.input_image_paint = input_image.scaled(scaled_width, scaled_height)
+        self.input_image_scaled = input_image.scaledToWidth(input_image.size().width())
+        self.input_image_paint  = input_image.scaledToWidth(input_image.size().width())
+
+        self.setGeometry(QRect(0, 0, input_image.size().width(), input_image.size().height()))
+
 
         pixmap = QPixmap(self.input_image_paint)
         self.setPixmap(pixmap)
@@ -61,7 +61,7 @@ class ImageLabel(QLabel):
         tmp_size_x = self.output_size_x*2
         tmp_size_y = self.output_size_y*2
 
-        y0-= tmp_size_y//16
+        y0+= tmp_size_y*3 - tmp_size_y//2
 
 
         for i in range(0, self.augmentation_count):
@@ -78,7 +78,7 @@ class ImageLabel(QLabel):
                 else:
                     class_folder = "foreground"
 
-                result_path = "/home/michal/cells/"
+                result_path = "/home/michal/dataset/neurons/"
                 name = result_path + class_folder + "/" + str(self.name_idx) + "_" + str(i) + ".png"
                 print("saving to ", name)
                 augmented.save(name)
