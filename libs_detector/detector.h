@@ -43,6 +43,7 @@ class Detector
         unsigned int output_width, output_height, output_depth;
 
     private:
+        unsigned int padding;
         std::vector<std::vector<float>> color_palette;
 
     public:
@@ -55,6 +56,10 @@ class Detector
         sDetectorResult &get_result();
         void inpaint_class_result(std::vector<float> &image_v, float alpha = 0.3);
         void inpaint_class_result(cv::Mat &image, float alpha = 0.3);
+
+        std::vector<float> get_mask();
+
+        void set_padding(unsigned int padding);
 
     private:
         void result_init();

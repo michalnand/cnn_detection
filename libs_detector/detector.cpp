@@ -40,6 +40,8 @@ Detector::Detector(std::string network_config_file_name, unsigned int image_widt
 
     color_palette = generate_color_palette(output_depth - 1);
 
+    padding = 16;
+
     std::cout << "DETECTOR INIT DONE\n";
 }
 
@@ -213,8 +215,6 @@ sDetectorResult& Detector::get_result()
 
 void Detector::inpaint_class_result(std::vector<float> &image_v, float alpha)
 {
-    unsigned int padding = 16;
-
     for (unsigned int k = 0; k < 3; k++)
     for (unsigned int j = padding; j < image_height - padding; j++)
     for (unsigned int i = padding; i < image_width - padding; i++)
@@ -254,6 +254,35 @@ void Detector::inpaint_class_result(cv::Mat &image, float alpha)
 
             input_idx++;
         }
+}
+
+std::vector<float> Detector::get_mask()
+{
+    std::vector<float> mask_result(image_width*image_height*3);
+
+    for (unsigned int k = 0; k < 3; k++)
+    for (unsigned int j = padding; j < image_height - padding; j++)
+    for (unsigned int i = padding; i < image_width - padding; i++)
+    {
+        unsigned int idx = (k*image_height + j)*image_width + i;
+        unsigned int res_j = (j)/height_ratio;
+        unsigned int res_i = (i)/width_ratio;
+
+        unsigned int class_id = result.class_result[res_j][res_i];
+
+        if (class_id != 0)
+        {
+            float v = get_class_color(class_id-1)[k];
+            mask_result[idx] = v;
+        }
+    }
+
+    return mask_result;
+}
+
+void Detector::set_padding(unsigned int padding)
+{
+    this->padding = padding;
 }
 
 void Detector::result_init()
