@@ -1,6 +1,7 @@
 #include <detector.h>
 #include <timer.h>
 #include <iostream>
+#include <thread>
 
 Detector::Detector(std::string network_config_file_name, unsigned int image_width, unsigned int image_height, float confidence)
 {
@@ -56,48 +57,38 @@ float Detector::cnn_output_get(unsigned int x, unsigned y, unsigned ch)
     return cnn_output[idx];
 }
 
-void Detector::compute_softmax()
+void Detector::fill_softmax()
 {
-    for (unsigned int j = 0; j < output_height; j++)
-        for (unsigned int i = 0; i < output_width; i++)
-        {
-            float sum = 0.00000001;
+    unsigned int idx = 0;
 
-            float max = cnn_output_get(i, j, 0);
-            for (unsigned int k = 0; k < output_depth; k++)
+    for (unsigned int k = 0; k < output_depth; k++)
+        for (unsigned int j = 0; j < output_height; j++)
+            for (unsigned int i = 0; i < output_width; i++)
             {
-                float tmp = cnn_output_get(i, j, k);
-                if (tmp > max)
-                    max = tmp;
+                softmax_output[k][j][i] = cnn_output[idx];
+                idx++;
             }
-
-            for (unsigned int k = 0; k < output_depth; k++)
-            {
-                float tmp = cnn_output_get(i, j, k);
-                sum+= exp(tmp - max);
-            }
-
-            for (unsigned int k = 0; k < output_depth; k++)
-                softmax_output[k][j][i] = exp(cnn_output_get(i, j, k) - max)/sum;
-        }
 }
 
 void Detector::process(std::vector<float> &image_v)
 {
     Timer timer;
+    Timer network_timer;
 
     timer.start();
+    network_timer.start();
 
     cnn->forward(cnn_output, image_v);
 
-    compute_softmax();
+    network_timer.stop();
+
+    fill_softmax();
 
     unsigned int ptr;
     ptr = 0;
 
     int y_shift = 2;
     int x_shift = 2;
-
 
     for (unsigned int j = 0; j < output_height - y_shift; j++)
     for (unsigned int i = 0; i < output_width - x_shift; i++)
@@ -128,7 +119,7 @@ void Detector::process(std::vector<float> &image_v)
 
     timer.stop();
     result.computing_time = timer.get_duration();
-
+    result.network_computing_time = network_timer.get_duration();
 
     result.json.clear();
 
@@ -159,20 +150,20 @@ void Detector::process(std::vector<float> &image_v)
 
 }
 
-void Detector::process(cv::Mat &image)
+void Detector::fill_cnn_input_thread(cv::Mat *image, unsigned int min, unsigned int max)
 {
     unsigned int layer_size = image_width*image_height;
-    unsigned int input_idx = 0;
+    unsigned int input_idx = min*image_width;
 
-    /*
-    for (unsigned int y = 0; y < image_height; y++)
+    for (unsigned int y = min; y < max; y++)
+    {
+        cv::Vec3b* row = image->ptr<cv::Vec3b>(y);
+
         for (unsigned int x = 0; x < image_width; x++)
         {
-            auto pixel = image.at<cv::Vec3b>(y,x);
-            float r = pixel[2]/256.0;
-            float g = pixel[1]/256.0;
-            float b = pixel[0]/256.0;
-
+            float r = row[x][2]/256.0;
+            float g = row[x][1]/256.0;
+            float b = row[x][0]/256.0;
 
             cnn_input[input_idx + 0*layer_size] = r;
             cnn_input[input_idx + 1*layer_size] = g;
@@ -180,14 +171,33 @@ void Detector::process(cv::Mat &image)
 
             input_idx++;
         }
-    */
+    }
+}
+
+void Detector::process(cv::Mat &image)
+{
+
+/*
+    std::thread th1(&Detector::fill_cnn_input_thread, this, &image, 0, 120 - 1);
+    std::thread th2(&Detector::fill_cnn_input_thread, this, &image, 120 - 1, 240 - 1);
+    std::thread th3(&Detector::fill_cnn_input_thread, this, &image, 240 - 1, 360 -1);
+    std::thread th4(&Detector::fill_cnn_input_thread, this, &image, 360 - 1, 480 - 1);
+
+    th1.join();
+    th2.join();
+    th3.join();
+    th4.join();
+*/
+
+    unsigned int layer_size = image_width*image_height;
+    unsigned int input_idx = 0;
 
     for (unsigned int y = 0; y < image_height; y++)
     {
         cv::Vec3b* row = image.ptr<cv::Vec3b>(y);
 
         for (unsigned int x = 0; x < image_width; x++)
-        {
+        { 
             float r = row[x][2]/256.0;
             float g = row[x][1]/256.0;
             float b = row[x][0]/256.0;
@@ -208,10 +218,6 @@ sDetectorResult& Detector::get_result()
 {
     return result;
 }
-
-
-
-
 
 void Detector::inpaint_class_result(std::vector<float> &image_v, float alpha)
 {

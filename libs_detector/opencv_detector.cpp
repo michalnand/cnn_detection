@@ -16,7 +16,7 @@ OpenCVDetector::OpenCVDetector(std::string json_file_name)
     print_results_enabled = detector_json.result["print_results_enabled"].asBool();
     visualisation_enabled = detector_json.result["visualisation_enabled"].asBool();
     saving_enabled = detector_json.result["saving_enabled"].asBool();
- 
+
     width  = padding(width, 16);
     height = padding(height, 16);
 
@@ -40,6 +40,7 @@ OpenCVDetector::OpenCVDetector(std::string json_file_name)
         detector = new Detector(network, real_width, real_height, confidence);
 
         fps_filtered = 0.0;
+        fps_network_filtered = 0.0;
 
         if (visualisation_enabled)
             cv::namedWindow("camera", 1);
@@ -96,7 +97,6 @@ int OpenCVDetector::process_frame()
 {
     cv::Mat frame;
     *video_capture >> frame;
-    *video_capture >> frame;
 
     if (frame.empty())
         return -1;
@@ -105,8 +105,13 @@ int OpenCVDetector::process_frame()
     detector->process(frame);
     timer.stop();
 
+    float k = 0.02;
+
     float fps = 1.0/(0.001*timer.get_duration() + 0.000000001);
-	fps_filtered = 0.95*fps_filtered + 0.05*fps;
+	fps_filtered = (1.0 - k)*fps_filtered + k*fps;
+
+    float fps_network = 1.0/(0.001*detector->get_result().network_computing_time + 0.000000001);
+    fps_network_filtered = (1.0 - k)*fps_network_filtered + k*fps_network;
 
     if (visualisation_enabled)
     {
@@ -114,6 +119,7 @@ int OpenCVDetector::process_frame()
 
     	std::string str_fps_a = "resolution = [" + std::to_string(real_width) + " " + std::to_string(real_height) + "]";
     	std::string str_fps_b = "fps = " + std::to_string((int)fps_filtered);
+
     	cv::putText(frame, str_fps_a, cv::Point(30, 30), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(255, 0, 0), 2);
     	cv::putText(frame, str_fps_b, cv::Point(30, 60), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(255, 0, 0), 2);
 
@@ -129,7 +135,7 @@ int OpenCVDetector::process_frame()
     if (print_results_enabled)
     {
         std::cout << get_result().json_string << "\n\n";
-        std::cout << "FPS " << fps_filtered << "\n\n";
+        std::cout << "FPS " << fps_filtered << ", FPSNetwork " << fps_network_filtered <<"\n\n";
     }
 
     if( cv::waitKey(10) == 27 )

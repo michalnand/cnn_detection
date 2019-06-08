@@ -20,7 +20,7 @@ struct sDetectorResult
     unsigned int output_height ;
     unsigned int classes_count ;
 
-    float computing_time;
+    float computing_time, network_computing_time;
 
     Json::Value json;
     std::string json_string;
@@ -68,7 +68,8 @@ class Detector
         std::vector<float>& get_class_color(unsigned int class_id);
 
         float cnn_output_get(unsigned int x, unsigned y, unsigned ch);
-        void compute_softmax();
+        void fill_softmax();
+        void fill_cnn_input_thread(cv::Mat *image, unsigned int min, unsigned int max);
 
 };
 
