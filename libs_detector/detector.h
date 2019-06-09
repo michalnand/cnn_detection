@@ -69,8 +69,6 @@ class Detector
 
         float cnn_output_get(unsigned int x, unsigned y, unsigned ch);
         void fill_softmax();
-        void fill_cnn_input_thread(cv::Mat *image, unsigned int min, unsigned int max);
-
 };
 
 

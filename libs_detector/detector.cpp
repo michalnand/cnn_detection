@@ -43,6 +43,7 @@ Detector::Detector(std::string network_config_file_name, unsigned int image_widt
 
     padding = 16;
 
+
     std::cout << "DETECTOR INIT DONE\n";
 }
 
@@ -150,14 +151,14 @@ void Detector::process(std::vector<float> &image_v)
 
 }
 
-void Detector::fill_cnn_input_thread(cv::Mat *image, unsigned int min, unsigned int max)
+void Detector::process(cv::Mat &image)
 {
     unsigned int layer_size = image_width*image_height;
-    unsigned int input_idx = min*image_width;
+    unsigned int input_idx = 0;
 
-    for (unsigned int y = min; y < max; y++)
+    for (unsigned int y = 0; y < image_height; y++)
     {
-        cv::Vec3b* row = image->ptr<cv::Vec3b>(y);
+        cv::Vec3b* row = image.ptr<cv::Vec3b>(y);
 
         for (unsigned int x = 0; x < image_width; x++)
         {
@@ -172,43 +173,7 @@ void Detector::fill_cnn_input_thread(cv::Mat *image, unsigned int min, unsigned 
             input_idx++;
         }
     }
-}
 
-void Detector::process(cv::Mat &image)
-{
-
-/*
-    std::thread th1(&Detector::fill_cnn_input_thread, this, &image, 0, 120 - 1);
-    std::thread th2(&Detector::fill_cnn_input_thread, this, &image, 120 - 1, 240 - 1);
-    std::thread th3(&Detector::fill_cnn_input_thread, this, &image, 240 - 1, 360 -1);
-    std::thread th4(&Detector::fill_cnn_input_thread, this, &image, 360 - 1, 480 - 1);
-
-    th1.join();
-    th2.join();
-    th3.join();
-    th4.join();
-*/
-
-    unsigned int layer_size = image_width*image_height;
-    unsigned int input_idx = 0;
-
-    for (unsigned int y = 0; y < image_height; y++)
-    {
-        cv::Vec3b* row = image.ptr<cv::Vec3b>(y);
-
-        for (unsigned int x = 0; x < image_width; x++)
-        { 
-            float r = row[x][2]/256.0;
-            float g = row[x][1]/256.0;
-            float b = row[x][0]/256.0;
-
-            cnn_input[input_idx + 0*layer_size] = r;
-            cnn_input[input_idx + 1*layer_size] = g;
-            cnn_input[input_idx + 2*layer_size] = b;
-
-            input_idx++;
-        }
-    }
 
     process(cnn_input);
 }

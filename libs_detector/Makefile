@@ -2,6 +2,7 @@ OUTPUT_NAME = libs_detector
 
 
 INC+= -I.
+INC+= -I../libs
 INC+= -I$(LIBS_RYSY_PATH)/libs_common
 INC+= -I$(LIBS_RYSY_PATH)/libs_cnn_deployment
 
