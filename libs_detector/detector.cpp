@@ -13,36 +13,39 @@ Detector::Detector(std::string network_config_file_name, unsigned int image_widt
     this->image_height = image_height;
     this->confidence = confidence;
 
-    sGeometry input_geometry;
-    input_geometry.w = image_width;
-    input_geometry.h = image_height;
-    input_geometry.d = 3;
+    sShape input_shape;
+    input_shape.w = image_width;
+    input_shape.h = image_height;
+    input_shape.d = 3;
 
-    sGeometry output_geometry;
+    sShape output_shape;
 
-    unsigned int output_kernel_width    = json.result["layers"][last_layer]["input_geometry"][0].asInt();
-    unsigned int output_kernel_height   = json.result["layers"][last_layer]["input_geometry"][1].asInt();
-    unsigned int output_kernel_depth    = json.result["layers"][last_layer]["output_geometry"][2].asInt();
+    unsigned int output_kernel_width    = json.result["layers"][last_layer]["input_shape"][0].asInt();
+    unsigned int output_kernel_height   = json.result["layers"][last_layer]["input_shape"][1].asInt();
+    unsigned int output_kernel_depth    = json.result["layers"][last_layer]["output_shape"][2].asInt();
 
-    width_ratio    = json.result["input_geometry"][0].asInt()/output_kernel_width;
-    height_ratio   = json.result["input_geometry"][1].asInt()/output_kernel_height;
 
-    output_geometry.w  = output_kernel_width;
-    output_geometry.h  = output_kernel_height;
-    output_geometry.d  = output_kernel_depth;
+    width_ratio    = json.result["input_shape"][0].asInt()/output_kernel_width;
+    height_ratio   = json.result["input_shape"][1].asInt()/output_kernel_height;
 
-    output_width    = input_geometry.w/width_ratio;
-    output_height   = input_geometry.h/height_ratio;
+
+    output_shape.w  = output_kernel_width;
+    output_shape.h  = output_kernel_height;
+    output_shape.d  = output_kernel_depth;
+
+    output_width    = input_shape.w/width_ratio;
+    output_height   = input_shape.h/height_ratio;
     output_depth    = output_kernel_depth;
 
-    cnn = new CNNDeployment(network_config_file_name, input_geometry);
+    std::cout << output_shape.w << " " << output_shape.h << " " << output_shape.d << "\n";
+
+    cnn = new CNNDeployment(network_config_file_name, input_shape);
 
     result_init();
 
     color_palette = generate_color_palette(output_depth - 1);
 
     padding = 16;
-
 
     std::cout << "DETECTOR INIT DONE\n";
 }

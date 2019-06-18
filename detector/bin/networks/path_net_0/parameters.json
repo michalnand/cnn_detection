@@ -9,8 +9,8 @@
     "network_architecture" :
     {
         "network_log_file_name" : "networks/path_net_0/network.log",
-        "input_geometry"     : [64, 64, 3],
-        "output_geometry"    : [1, 1, 2],
+        "input_shape"     : [64, 64, 3],
+        "output_shape"    : [1, 1, 2],
 
         "hyperparameters" :
         {
@@ -26,32 +26,32 @@
         [
             {
               "type"      : "convolution",
-              "geometry"  : [3, 3, 8]
+              "shape"  : [3, 3, 8]
             },
             {
               "type"      : "relu"
             },
             {
                 "type"      : "max pooling",
-                "geometry"  : [2, 2, 1]
+                "shape"  : [2, 2, 1]
             },
 
 
             {
               "type"      : "convolution",
-              "geometry"  : [3, 3, 8]
+              "shape"  : [3, 3, 8]
             },
             {
               "type"      : "relu"
             },
             {
                 "type"      : "max pooling",
-                "geometry"  : [2, 2, 1]
+                "shape"  : [2, 2, 1]
             },
 
             {
               "type"      : "convolution",
-              "geometry"  : [3, 3, 8]
+              "shape"  : [3, 3, 8]
             },
             {
               "type"      : "relu"
@@ -59,7 +59,7 @@
 
             {
                 "type"      : "max pooling",
-                "geometry"  : [2, 2, 1]
+                "shape"  : [2, 2, 1]
             },
 
             {
