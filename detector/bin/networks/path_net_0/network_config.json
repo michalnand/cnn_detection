@@ -36,7 +36,7 @@
 				8
 			],
 			"type" : "convolution",
-			"weights_file_name" : "networks/path_network_0b/layer_0"
+			"weights_file_name" : "networks/path_net_0/layer_0"
 		},
 		{
 			"input_shape" :
@@ -58,7 +58,7 @@
 				0
 			],
 			"type" : "relu",
-			"weights_file_name" : "networks/path_network_0b/layer_1"
+			"weights_file_name" : "networks/path_net_0/layer_1"
 		},
 		{
 			"input_shape" :
@@ -80,7 +80,7 @@
 				1
 			],
 			"type" : "max_pooling",
-			"weights_file_name" : "networks/path_network_0b/layer_2"
+			"weights_file_name" : "networks/path_net_0/layer_2"
 		},
 		{
 			"input_shape" :
@@ -102,7 +102,7 @@
 				8
 			],
 			"type" : "convolution",
-			"weights_file_name" : "networks/path_network_0b/layer_3"
+			"weights_file_name" : "networks/path_net_0/layer_3"
 		},
 		{
 			"input_shape" :
@@ -124,7 +124,7 @@
 				0
 			],
 			"type" : "relu",
-			"weights_file_name" : "networks/path_network_0b/layer_4"
+			"weights_file_name" : "networks/path_net_0/layer_4"
 		},
 		{
 			"input_shape" :
@@ -146,7 +146,7 @@
 				1
 			],
 			"type" : "max_pooling",
-			"weights_file_name" : "networks/path_network_0b/layer_5"
+			"weights_file_name" : "networks/path_net_0/layer_5"
 		},
 		{
 			"input_shape" :
@@ -168,7 +168,7 @@
 				8
 			],
 			"type" : "convolution",
-			"weights_file_name" : "networks/path_network_0b/layer_6"
+			"weights_file_name" : "networks/path_net_0/layer_6"
 		},
 		{
 			"input_shape" :
@@ -190,7 +190,7 @@
 				0
 			],
 			"type" : "relu",
-			"weights_file_name" : "networks/path_network_0b/layer_7"
+			"weights_file_name" : "networks/path_net_0/layer_7"
 		},
 		{
 			"input_shape" :
@@ -212,7 +212,7 @@
 				1
 			],
 			"type" : "max_pooling",
-			"weights_file_name" : "networks/path_network_0b/layer_8"
+			"weights_file_name" : "networks/path_net_0/layer_8"
 		},
 		{
 			"input_shape" :
@@ -234,7 +234,7 @@
 				0
 			],
 			"type" : "dropout",
-			"weights_file_name" : "networks/path_network_0b/layer_9"
+			"weights_file_name" : "networks/path_net_0/layer_9"
 		},
 		{
 			"input_shape" :
@@ -256,7 +256,7 @@
 				0
 			],
 			"type" : "output",
-			"weights_file_name" : "networks/path_network_0b/layer_10"
+			"weights_file_name" : "networks/path_net_0/layer_10"
 		}
 	],
 	"output_shape" :
