@@ -5,7 +5,7 @@
 
     "confidence"    : 0.85,
 
-    "network"       : "networks/path_net_3/trained/cnn_config.json",
+    "network"       : "networks/path_network_0b/network_config.json",
 
     "print_results_enabled"         : true,
     "visualisation_enabled"         : true,
