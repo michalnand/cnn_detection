@@ -20,7 +20,7 @@ SIZE = size
 # DEGUBFLAGS = -g -pg
 
 CFLAGS = $(DEGUBFLAGS) -O2 -Os -s -Wall -Wextra -pedantic -std=c++11 $(INC)
-CUDAFLAGS = -O3 -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC -std=c++11 $(INC)
+CUDAFLAGS = -O3 -D_FORCE_INLINES -arch=sm_53 -ccbin=$(CXX) -Xcompiler -fPIC -std=c++11 $(INC)
 
 LDFLAGS = $(DEGUBFLAGS) -lstdc++fs -lm -lpthread -pthread -std=c++11 -lglut -lGL -lGLU -lX11 `pkg-config --libs opencv` -ljsoncpp -L/usr/local/cuda/lib64 -lcuda -lcudart
 
