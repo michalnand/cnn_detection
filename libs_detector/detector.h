@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <thread>
 #include <cnn_deployment.h>
 
 #include <json_config.h>

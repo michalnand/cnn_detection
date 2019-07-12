@@ -1,7 +1,6 @@
 #include <detector.h>
 #include <timer.h>
 #include <iostream>
-#include <thread>
 
 Detector::Detector(std::string network_config_file_name, unsigned int image_width, unsigned int image_height, float confidence)
 {
@@ -114,12 +113,8 @@ void Detector::process(std::vector<float> &image_v)
 
         }
 
-        //std::cout << "["  << softmax_output[0][j][i] << ", " << softmax_output[1][j][i] << "] ";
         result.class_result[j + y_shift][i + x_shift] = max_k;
     }
-
-
-
 
     timer.stop();
     result.computing_time = timer.get_duration();
@@ -150,8 +145,6 @@ void Detector::process(std::vector<float> &image_v)
 
     Json::FastWriter fastWriter;
     result.json_string = fastWriter.write(result.json);
-
-
 }
 
 void Detector::process(cv::Mat &image)
@@ -286,8 +279,6 @@ void Detector::result_init()
             for (unsigned int i = 0; i < output_width; i++)
             {
                 softmax_output[k][j][i] = 0.0;
-                if (k == 0)
-                    softmax_output[k][j][i] = 1.0;
             }
         }
     }
